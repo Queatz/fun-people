@@ -1,0 +1,59 @@
+:host {
+  width: 0;
+  flex-grow: 1;
+  display: flex;
+  justify-items: start;
+  justify-content: start;
+  align-items: start;
+  align-content: start;
+
+  flex-wrap: wrap;
+
+  padding: .5rem;
+}
+
+.card {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: .5rem;
+
+  max-width: 24rem;
+
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 0 1rem rgb(0 0 0 / 12.5%);
+
+  &.add {
+    color: palevioletred;
+    cursor: pointer;
+  }
+
+  .card-title {
+    font-weight: bold;
+    margin-bottom: .25rem;
+
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .card-text {
+  }
+
+  input {
+    margin-top: 1rem;
+  }
+}
+
+.footer {
+  width: 100%;
+  padding: 1rem;
+
+  .link {
+    color: palevioletred;
+    cursor: pointer;
+  }
+}

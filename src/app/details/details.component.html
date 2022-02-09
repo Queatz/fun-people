@@ -1,0 +1,28 @@
+<div>
+  <div class="header">
+    <div class="title">
+      🌏 The World
+    </div>
+    <div class="i" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
+    <div class="menu" #menu
+         [style.top]="menuTop + 'px'"
+         [style.left]="menuLeft ? menuLeft + 'px' : ''"
+         [style.right]="menuRight ? menuRight + 'px' : ''"
+         *ngIf="showMenu">
+      <div class="menu-item" (click)="showMenu = false">Rename</div>
+      <div class="menu-item" (click)="showMenu = false">Edit description</div>
+      <div class="menu-item" (click)="showMenu = false">Change permissions</div>
+      <div class="menu-item" (click)="showMenu = false">Add a location</div>
+    </div>
+  </div>
+  <div class="in">
+    Outer space
+  </div>
+  <div class="description">
+    Location description
+  </div>
+  <div class="search" *ngIf="'is the world'">
+    <input placeholder="Find your city" />
+  </div>
+  <app-location-list></app-location-list>
+</div>

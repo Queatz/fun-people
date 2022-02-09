@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  height: 100%;
+
+  @media screen and (max-width: 640px) {
+    flex-direction: column;
+
+    .nav {
+      width: 100% !important;
+      border-right: unset !important;
+      border-bottom: 1px solid silver;
+      flex-direction: column-reverse !important;
+
+      max-height: 33.3%;
+      overflow-y: auto;
+
+      .locations {
+        height: unset !important;
+      }
+
+      .controls {
+        border-bottom: 1px solid silver;
+        border-top: unset !important;
+      }
+    }
+  }
+
+  .nav {
+    width: 20rem;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid silver;
+
+    .locations {
+      height: 0;
+      flex-grow: 1;
+      padding: 1rem;
+    }
+
+    .controls {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-evenly;
+
+      padding: 1rem;
+
+      border-top: 1px solid silver;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-grow: 1;
+  }
+}
+
+.red-dot {
+  color: red;
+  position: absolute;
+  top: -.5rem;
+  right: 0;
+}

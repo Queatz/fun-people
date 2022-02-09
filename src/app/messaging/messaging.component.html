@@ -1,0 +1,20 @@
+<div class="layout">
+  <div class="messaging">
+    <div class="message" [ngClass]="{ 'reverse': x[3] }" *ngFor="let x of messages">
+      <div class="photo-holder">
+        <div class="photo" *ngIf="x[2]">M</div>
+      </div>
+      <div class="content">
+        <div class="body">
+          {{ x[0] }}
+        </div>
+        <div *ngIf="x[1]" class="info">
+          {{ x[1] }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="send-message">
+    <input [(ngModel)]="sendMessage" (keydown.enter)="send()" placeholder="Reply" />
+  </div>
+</div>

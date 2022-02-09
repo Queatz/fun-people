@@ -1,0 +1,27 @@
+.list {
+  .item {
+    cursor: pointer;
+    padding: .5rem 1rem;
+
+    border-radius: 1rem;
+
+    &:hover {
+      background: #f8f8f8;
+    }
+
+    transition: background-color .2s ease;
+  }
+
+  .item-description {
+    font-size: 14px;
+    color: gray;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+
+  .item-name {
+    font-weight: bold;
+    margin-bottom: .25rem;
+  }
+}

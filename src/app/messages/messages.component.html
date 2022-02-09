@@ -1,0 +1,21 @@
+<div class="title">
+  Messages
+</div>
+<div class="contacts">
+  <div class="contact"
+       (click)="select()"
+       *ngFor="let x of [
+    ['Holly Meins', 'Where did you buy those shoes', true],
+    ['Jessica Rita', 'You: I did already'],
+    ['Samantha Mia', 'I really really wanna goo!!'],
+    ['Jon Ordagg', 'You: Ok']
+  ]">
+    <div class="photo-holder">
+      <div class="photo">M</div>
+    </div>
+    <div class="details">
+      <div class="name">{{ x[0] }} <span *ngIf="x[2]" class="red-dot">•</span></div>
+      <div class="last-message">{{ x[1] }}</div>
+    </div>
+  </div>
+</div>

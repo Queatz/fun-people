@@ -1,0 +1,47 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  font-size: 14px;
+  margin: 1rem 0;
+}
+
+.search {
+  margin-bottom: 1rem;
+}
+
+.in {
+  font-size: 14px;
+  color: gray;
+  cursor: pointer;
+  display: inline-flex;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.menu {
+  position: absolute;
+  z-index: 10;
+
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 0 1rem rgb(0 0 0 / 12.5%);
+  padding: .5rem;
+
+  .menu-item {
+    padding: .5rem;
+    cursor: pointer;
+    border-radius: .75rem;
+
+    &:hover {
+      background: #f8f8f8;
+    }
+
+    transition: background-color .2s ease;
+  }
+}

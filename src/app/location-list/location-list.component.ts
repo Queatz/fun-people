@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-location-list',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./location-list.component.scss']
 })
 export class LocationListComponent implements OnInit {
+
+  @Input() locations: Array<any> = []
+  @Output() selected = new EventEmitter<any>()
 
   constructor() { }
 

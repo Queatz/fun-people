@@ -1,7 +1,7 @@
 <div>
   <div class="header">
     <div class="title">
-      🌏 The World
+      {{ location?.name || '🌏 The World' }}
     </div>
     <div class="i" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
     <div class="menu" #menu
@@ -15,14 +15,14 @@
       <div class="menu-item" (click)="showMenu = false">Add a location</div>
     </div>
   </div>
-  <div class="in">
-    Outer space
+  <div class="in" (click)="open(location?.path?.[0])">
+    {{ location ? location?.path?.[0]?.name || '🌏 The World' : 'Outer space' }}
   </div>
   <div class="description">
-    Location description
+    {{ location ? location?.description : 'Some pretty planet' }}
   </div>
-  <div class="search" *ngIf="'is the world'">
-    <input placeholder="Find your city" />
+  <div class="search" *ngIf="!location">
+    <input [(ngModel)]="searchQuery" (ngModelChange)="search()" placeholder="Find your city" />
   </div>
-  <app-location-list></app-location-list>
+  <app-location-list [locations]="locations" (selected)="open($event)"></app-location-list>
 </div>

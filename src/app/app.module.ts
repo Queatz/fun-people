@@ -12,6 +12,7 @@ import { MessagingComponent } from './messaging/messaging.component';
 import {FormsModule} from "@angular/forms";
 import { LocationLinkComponent } from './location-link/location-link.component';
 import { LocationListComponent } from './location-list/location-list.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { LocationListComponent } from './location-list/location-list.component';
   ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         AppRoutingModule,
         FormsModule
     ],

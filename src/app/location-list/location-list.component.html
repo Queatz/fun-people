@@ -1,6 +1,6 @@
 <div class="list">
-  <div class="item" routerLink="/location" *ngFor="let x of ['🦍 Collaboration Cafe', '⛲ Rock Garden', '🎼 Composer\'s Corner']">
-    <div class="item-name">{{ x }}</div>
-    <div class="item-description">Something here</div>
+  <div class="item" (click)="selected.emit(x)" *ngFor="let x of locations">
+    <div class="item-name">{{ x.name }}</div>
+    <div class="item-description">{{ x.description }}</div>
   </div>
 </div>

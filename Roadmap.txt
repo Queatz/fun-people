@@ -1,0 +1,19 @@
+
+ [X] Search locations
+  [X] Auto-create location and parent locations
+ [X] Load location
+ [ ] Authenticate
+ [ ] Create post
+ [ ] Load posts
+ [ ] Edit location
+ [ ] Edit me
+ [ ] Send message
+ [ ] Load messages
+ [ ] Websocket messages
+ [ ] Sounds
+
+ [ ] Email about unread messages (after 1hr)
+ [ ] Typing indicator
+
+ [ ]  Favorite or pin locations
+ [ ] Preload with top cities

@@ -17,3 +17,4 @@
 
  [ ]  Favorite or pin locations
  [ ] Preload with top cities
+ [ ] Don't allow posting 2wice to the same location

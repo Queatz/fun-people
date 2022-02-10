@@ -1,7 +1,8 @@
 import {ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from "../api.service";
-import {delay, Subject, Subscription, takeUntil} from "rxjs";
+import {delay, filter, Subject, Subscription, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UiService} from "../ui.service";
 
 @Component({
   selector: 'app-details',
@@ -18,15 +19,13 @@ export class DetailsComponent implements OnInit, OnDestroy {
   @ViewChild('menu', { static: false })
   menuEl?: ElementRef
 
-  location?: any
-
   searchQuery = ''
   locations: Array<any> = []
 
   private searchObservable?: Subscription
   private destroyed = new Subject()
 
-  constructor(private api: ApiService, private route: ActivatedRoute, private router: Router, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, private api: ApiService, private route: ActivatedRoute, private router: Router, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -37,9 +36,22 @@ export class DetailsComponent implements OnInit, OnDestroy {
         if (l) {
           this.setLocationUrl(l)
         } else {
-          this.location = undefined
+          this.ui.location = undefined
         }
         this.cr.detectChanges()
+      }
+    })
+
+    this.ui.changes.pipe(
+      takeUntil(this.destroyed),
+      filter(() => !!this.ui.location),
+      switchMap(() => this.api.locationsOf(this.ui.location?.id))
+    ).subscribe({
+      next: locations => {
+        this.locations = locations
+      },
+      error: err => {
+        alert(err)
       }
     })
   }
@@ -76,6 +88,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
   closeMenu(event: Event) {
     if ((event.target as HTMLElement)?.className?.indexOf("menu") === -1) {
       this.showMenu = false
+    } else {
+      setTimeout(() => {
+        this.showMenu = false
+      })
+    }
+  }
+
+  @HostListener('window:keyup.escape', ['$event'])
+  up(event: Event) {
+    const location = this.ui.location?.path?.[0]
+    if (location) {
+      this.open(location)
     }
   }
 
@@ -127,13 +151,37 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   setLocationUrl(url?: string) {
     if (!url) {
-      this.location = ''
+      this.ui.location = ''
       return
     }
 
     this.api.locationByUrl(url).subscribe({
       next: (location: any) => {
-        this.location = location
+        this.ui.location = location
+      },
+      error: err => {
+        alert(err.statusText)
+      }
+    })
+  }
+
+  addLocation() {
+    if (!this.ui.location) {
+      return
+    }
+
+    const name = prompt('Location name')
+
+    if (!name?.trim()) {
+      return
+    }
+
+    this.api.createLocation({
+      locationId: this.ui.location.id,
+      name
+    }).subscribe({
+      next: () => {
+        this.ui.changes.next(null)
       },
       error: err => {
         alert(err.statusText)

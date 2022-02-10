@@ -21,4 +21,24 @@ export class ApiService {
   locationByUrl(url: string) {
     return this.http.get<any>(`${this.base}/location-url/${url}`)
   }
+
+  posts(locationId: string) {
+    return this.http.get<any>(`${this.base}/location/${this.key(locationId)}/posts`)
+  }
+
+  locationsOf(locationId: string) {
+    return this.http.get<any>(`${this.base}/location/${this.key(locationId)}/locations`)
+  }
+
+  createPost(post: any) {
+    return this.http.post<any>(`${this.base}/posts`, post)
+  }
+
+  createLocation(location: any) {
+    return this.http.post<any>(`${this.base}/locations`, location)
+  }
+
+  private key(id: string) {
+    return id.indexOf('/') === -1 ? id : id.split('/')[1]
+  }
 }

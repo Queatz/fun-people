@@ -1,7 +1,7 @@
 <div>
   <div class="header">
     <div class="title">
-      {{ location?.name || '🌏 The World' }}
+      {{ ui.location?.name || '🌏 The World' }}
     </div>
     <div class="i" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
     <div class="menu" #menu
@@ -9,19 +9,19 @@
          [style.left]="menuLeft ? menuLeft + 'px' : ''"
          [style.right]="menuRight ? menuRight + 'px' : ''"
          *ngIf="showMenu">
-      <div class="menu-item" (click)="showMenu = false">Rename</div>
-      <div class="menu-item" (click)="showMenu = false">Edit description</div>
-      <div class="menu-item" (click)="showMenu = false">Change permissions</div>
-      <div class="menu-item" (click)="showMenu = false">Add a location</div>
+      <div class="menu-item">Rename</div>
+      <div class="menu-item">Edit description</div>
+      <div class="menu-item">Change permissions</div>
+      <div class="menu-item" (click)="addLocation()">Add a location</div>
     </div>
   </div>
-  <div class="in" (click)="open(location?.path?.[0])">
-    {{ location ? location?.path?.[0]?.name || '🌏 The World' : 'Outer space' }}
+  <div class="in" (click)="open(ui.location?.path?.[0])">
+    {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 The World' : 'Outer space' }}
   </div>
   <div class="description">
-    {{ location ? location?.description : 'Some pretty planet' }}
+    {{ ui.location ? ui.location?.description : 'Some pretty planet' }}
   </div>
-  <div class="search" *ngIf="!location">
+  <div class="search" *ngIf="!ui.location">
     <input [(ngModel)]="searchQuery" (ngModelChange)="search()" placeholder="Find your city" />
   </div>
   <app-location-list [locations]="locations" (selected)="open($event)"></app-location-list>

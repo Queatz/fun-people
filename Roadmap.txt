@@ -1,16 +1,6 @@
 
-General
-=======
-
- [ ] FEAT  limit all list endpoints to 20
- [ ] BUG   Don't return email for people on all calls
-
-Locations
-=========
-
- [X] FEAT  Preload the world with top+random cities /location-top
- [ ] FEAT  Location edit history
- [X] FEAT  Edit, delete my posts
+ [ ] BUG  editing a place doesn't return parent location
+ [ ] BUG  Not found -> redirect to home
 
 Messaging
 =========
@@ -20,10 +10,16 @@ Messaging
  [ ] FEAT  Send message
  [ ] FEAT  Load messages
  [ ] FEAT  Websocket messages
+ [ ] FEAT  Colors from Closer
  [ ] FEAT  Sounds
 
-Settings & Profile
-==================
+Next
+====
 
+ [ ] FEAT Remember my last location in localStorage
  [ ] FEAT Favorite or pin locations
  [ ] FEAT Temporarily mute posts
+ [ ] FEAT Location edit history
+ [ ] FEAT Settings -> Suggest an improvement
+ [ ] FEAT Show number of people in the hangouts
+ [ ] Permissions -> Who can manage this hangout? Just me, Everyone

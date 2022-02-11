@@ -39,7 +39,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   menuItems(post: any) {
     return () => [
       {
-        name: 'Edit', callback: () => {
+        name: 'Edit message', callback: () => {
           const text = prompt('Post', post.text || '')
 
           if (!text?.trim()) {
@@ -57,7 +57,7 @@ export class PostsComponent implements OnInit, OnDestroy {
         }
       },
       {
-        name: 'Remove', callback: () => {
+        name: 'Leave hangout', callback: () => {
           this.api.removePost(post.id).subscribe({
             next: () => {
               this.ui.changes.next(null)
@@ -77,7 +77,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   createPost() {
     if (!this.ui.me) {
-      alert('Sign in to post')
+      alert('Sign in to join hangouts')
 
       this.ui.auth(() => {
         this.createPost()
@@ -86,7 +86,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       return
     }
 
-    const text = prompt("Post")
+    const text = prompt("Add a message")
 
     if (!text?.trim()) {
       return

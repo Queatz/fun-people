@@ -1,3 +1,9 @@
+<div class="header">
+  <div class="title">People</div>
+  <div *ngIf="!posts.length" class="secondary">
+    No one's here
+  </div>
+</div>
 <div class="card" *ngFor="let x of posts">
   <div class="card-title">
     <div class="card-title-text" (click)="showPerson(x.person)">{{ x.person?.name || 'Monkey' }}</div>
@@ -8,9 +14,8 @@
   <input placeholder="Reply to {{ x.person?.name || 'Monkey' }}" />
 </div>
 <div class="footer" *ngIf="ui.location && !imHere()">
-  <div class="link" (click)="createPost()">Add yourself in this location</div>
+  <div class="link" (click)="createPost()">Join this hangout</div>
 </div>
-
 <div class="footer" *ngIf="!ui.location">
   Something random here
 </div>

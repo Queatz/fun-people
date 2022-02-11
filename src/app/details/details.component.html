@@ -1,19 +1,22 @@
 <div *ngIf="!loading">
   <div class="header">
     <div class="title">
-      {{ ui.location?.name || '🌏 The World' }}
+      {{ ui.location?.name || '🌏 Earth' }}
     </div>
     <div class="i" *ngIf="ui.location && ui.me" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
     <app-menu #menu [items]="menuItems"></app-menu>
   </div>
   <div class="in" (click)="open(ui.location?.path?.[0])">
-    {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 The World' : 'Outer space' }}
+    {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 Earth' : '🌠 Outer space' }}
   </div>
   <div class="description">
-    {{ ui.location ? ui.location?.description : 'Some pretty planet' }}
+    {{ ui.location ? ui.location?.description : '' }}
   </div>
   <div class="search" *ngIf="!ui.location">
-    <input [(ngModel)]="searchQuery" (ngModelChange)="search()" placeholder="Find your city" />
+    <input [(ngModel)]="searchQuery" (ngModelChange)="search()" placeholder="Search for your city" />
+  </div>
+  <div *ngIf="locations.length && !searchResultsShown" class="title">
+    {{ ui.location ? 'Hangouts' : 'Discover hangouts' }}
   </div>
   <app-location-list [locations]="locations" (selected)="open($event)"></app-location-list>
 </div>

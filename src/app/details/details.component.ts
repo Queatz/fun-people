@@ -28,6 +28,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   loading = true
   searchQuery = ''
+  searchResultsShown = false
   locations: Array<any> = []
 
   private searchObservable?: Subscription
@@ -36,7 +37,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   menuItems = () => [
     { name: 'Edit description', callback: () => this.editDescription() },
     { name: 'Manage permissions', callback: () => this.addLocation() },
-    { name: 'Add a location', callback: () => this.addLocation() }
+    { name: 'Add a hangout', callback: () => this.addLocation() }
   ]
 
   constructor(public ui: UiService, private api: ApiService, private route: ActivatedRoute, private router: Router, private cr: ChangeDetectorRef) { }
@@ -92,6 +93,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.searchObservable?.unsubscribe()
 
     if (!this.searchQuery.trim()) {
+      this.searchResultsShown = false
+      this.locations = []
+      this.setLocationUrl()
       return
     }
 
@@ -100,6 +104,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       switchMap(() => this.api.search(this.searchQuery))
     ).subscribe({
       next: results => {
+        this.searchResultsShown = true
         this.locations = results.map(x => ({
           url: x.url,
           name: x.name,

@@ -11,10 +11,14 @@
     <app-menu #menu [items]="menuItems(x)"></app-menu>
   </div>
   <div class="card-text">{{ x.text }}</div>
-  <input placeholder="Reply to {{ x.person?.name || 'Monkey' }}" />
+  <input *ngIf="ui.me?.id !== x.person?.id"
+         #reply
+         (keydown.enter)="replyToPost(x, reply)"
+         [placeholder]="(ui.me ? 'Reply to ' : 'Sign in to reply to ') + (x.person?.name || 'Monkey')"
+         [disabled]="!ui.me" />
 </div>
 <div class="footer" *ngIf="ui.location && !imHere()">
-  <div class="link" (click)="createPost()">Join this hangout</div>
+  <div class="link" (click)="createPost()">{{ ui.me ? 'Join' : 'Sign in to join' }} this hangout</div>
 </div>
 <div class="footer" *ngIf="!ui.location">
   Something random here

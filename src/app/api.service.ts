@@ -42,6 +42,10 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/posts`, post)
   }
 
+  replyToPost(postId: string, text: string) {
+    return this.http.post<any>(`${this.base}/post/${this.key(postId)}/reply`, { text })
+  }
+
   editPost(postId: string, post: any) {
     return this.http.post<any>(`${this.base}/post/${this.key(postId)}`, post)
   }

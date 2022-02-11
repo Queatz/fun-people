@@ -108,4 +108,25 @@ export class PostsComponent implements OnInit, OnDestroy {
   imHere() {
     return this.posts.some(x => x.personId === this.ui.me?.id)
   }
+
+  replyToPost(post: any, input: HTMLInputElement) {
+    const text = input.value
+    input.value = ''
+
+    if (!text.trim()) {
+      return
+    }
+
+    this.api.replyToPost(post.id, text).pipe(
+      takeUntil(this.destroyed)
+    ).subscribe({
+      next: () => {
+        alert('Your message was sent')
+      },
+      error: err => {
+        alert(err.statusText)
+        input.value = text
+      }
+    })
+  }
 }

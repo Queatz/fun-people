@@ -2,6 +2,8 @@
  [ ] BUG  editing a place doesn't return parent location
  [ ] BUG  Not found -> redirect to home
 
+ [ ] FunPeople -> Hangoutville.com
+
 Messaging
 =========
 

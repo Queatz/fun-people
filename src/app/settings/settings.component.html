@@ -19,7 +19,10 @@
 
     <app-location-list [locations]="locations" empty="None" (selected)="open($event)"></app-location-list>
   </div>
-  <div>
-    <a *ngIf="!ui.me" (click)="ui.auth()">Sign in</a>
+  <div *ngIf="!ui.me">
+    <div class="title">
+      Profile
+    </div>
+    <a (click)="ui.auth()">Sign in</a>
   </div>
 </div>

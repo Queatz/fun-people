@@ -3,15 +3,14 @@
     <div class="title">
       {{ ui.location?.name || '🌏 The World' }}
     </div>
-    <div class="i" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
+    <div class="i" *ngIf="ui.location" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
     <div class="menu" #menu
          [style.top]="menuTop + 'px'"
          [style.left]="menuLeft ? menuLeft + 'px' : ''"
          [style.right]="menuRight ? menuRight + 'px' : ''"
          *ngIf="showMenu">
-      <div class="menu-item">Rename</div>
-      <div class="menu-item">Edit description</div>
-      <div class="menu-item">Change permissions</div>
+      <div class="menu-item" (click)="editDescription()">Edit description</div>
+      <div class="menu-item" *ngIf="ui.location.owned">Change permissions</div>
       <div class="menu-item" (click)="addLocation()">Add a location</div>
     </div>
   </div>

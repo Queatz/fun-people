@@ -95,11 +95,18 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener('window:keyup.escape', ['$event'])
-  up(event: Event) {
+  @HostListener('window:keyup.escape')
+  up() {
+    if (this.showMenu) {
+      this.showMenu = false
+      return
+    }
+
     const location = this.ui.location?.path?.[0]
     if (location) {
       this.open(location)
+    } else {
+      this.open()
     }
   }
 
@@ -182,6 +189,29 @@ export class DetailsComponent implements OnInit, OnDestroy {
     }).subscribe({
       next: () => {
         this.ui.changes.next(null)
+      },
+      error: err => {
+        alert(err.statusText)
+      }
+    })
+  }
+
+  editDescription() {
+    if (!this.ui.location) {
+      return
+    }
+
+    const description = prompt('Location description', this.ui.location.description)
+
+    if (!description?.trim()) {
+      return
+    }
+
+    this.api.updateLocation(this.ui.location.id, {
+      description
+    }).subscribe({
+      next: location => {
+        this.ui.location = location
       },
       error: err => {
         alert(err.statusText)

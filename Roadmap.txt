@@ -2,11 +2,11 @@
  [X] Search locations
   [X] Auto-create location and parent locations
  [X] Load location
- [ ] Authenticate
- [ ] Create post
- [ ] Load posts
- [ ] Edit location
- [ ] Edit me
+ [X] Authenticate
+ [X] Create post
+ [X] Load posts
+ [X] Edit location
+ [X] Edit me
  [ ] Send message
  [ ] Load messages
  [ ] Websocket messages
@@ -18,3 +18,6 @@
  [ ]  Favorite or pin locations
  [ ] Preload with top cities
  [ ] Don't allow posting 2wice to the same location
+ [ ] Location edit history
+
+ [ ] limit all list endpoints to 20

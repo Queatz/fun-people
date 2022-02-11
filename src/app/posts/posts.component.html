@@ -3,6 +3,10 @@
   <div class="card-text">{{ x.text }}</div>
   <input placeholder="Reply to {{ x.person?.name || 'Monkey' }}" />
 </div>
-<div class="footer">
+<div class="footer" *ngIf="ui.location">
   <div class="link" (click)="createPost()">Add yourself to this location</div>
+</div>
+
+<div class="footer" *ngIf="!ui.location">
+  Something random here
 </div>

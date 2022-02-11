@@ -57,6 +57,10 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/me`, me)
   }
 
+  updateLocation(locationId: string, location: any) {
+    return this.http.post<any>(`${this.base}/location/${this.key(locationId)}`, location)
+  }
+
   setAuth(token?: string) {
     this.token = token
 

@@ -30,13 +30,19 @@
   }
 
   .card-title {
-    font-weight: bold;
+    display: flex;
+
     margin-bottom: .25rem;
 
-    cursor: pointer;
+    &-text {
+      font-weight: bold;
+      cursor: pointer;
+      width: 0;
+      flex-grow: 1;
 
-    &:hover {
-      text-decoration: underline;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

@@ -15,6 +15,7 @@ import { LocationListComponent } from './location-list/location-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticateInterceptor} from "./authenticate.interceptor";
 import { PersonComponent } from './person/person.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PersonComponent } from './person/person.component';
     MessagingComponent,
     LocationLinkComponent,
     LocationListComponent,
-    PersonComponent
+    PersonComponent,
+    MenuComponent
   ],
     imports: [
         BrowserModule,

@@ -10,7 +10,6 @@ Locations
 
  [ ] FEAT  Preload the world with top+random cities /location-top
  [ ] FEAT  Location edit history
- [ ] BUG   Disallow posting twice to the same location
  [ ] FEAT  Edit, delete my posts
 
 Messaging

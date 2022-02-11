@@ -23,25 +23,3 @@
     text-decoration: underline;
   }
 }
-
-.menu {
-  position: absolute;
-  z-index: 10;
-
-  border-radius: 1rem;
-  background: white;
-  box-shadow: 0 0 1rem rgb(0 0 0 / 12.5%);
-  padding: .5rem;
-
-  .menu-item {
-    padding: .5rem;
-    cursor: pointer;
-    border-radius: .75rem;
-
-    &:hover {
-      background: #f8f8f8;
-    }
-
-    transition: background-color .2s ease;
-  }
-}

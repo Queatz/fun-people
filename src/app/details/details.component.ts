@@ -12,6 +12,7 @@ import {ApiService} from "../api.service";
 import {delay, filter, of, Subject, Subscription, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UiService} from "../ui.service";
+import {MenuComponent} from "../menu/menu.component";
 
 @Component({
   selector: 'app-details',
@@ -22,13 +23,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   @Output() locationChanged = new EventEmitter<void>()
 
-  showMenu = false
-  menuTop = 0
-  menuLeft = 0
-  menuRight = 0
-
-  @ViewChild('menu', { static: false })
-  menuEl?: ElementRef
+  @ViewChild('menu', { static: false, read: MenuComponent })
+  menu?: MenuComponent
 
   loading = true
   searchQuery = ''
@@ -36,6 +32,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   private searchObservable?: Subscription
   private readonly destroyed = new Subject<void>()
+
+  menuItems = () => [
+    { name: 'Edit description', callback: () => this.editDescription() },
+    { name: 'Manage permissions', callback: () => this.addLocation() },
+    { name: 'Add a location', callback: () => this.addLocation() }
+  ]
 
   constructor(public ui: UiService, private api: ApiService, private route: ActivatedRoute, private router: Router, private cr: ChangeDetectorRef) { }
 
@@ -71,44 +73,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.destroyed.complete()
   }
 
-  menu(from: HTMLElement) {
-    this.menuTop = from.getBoundingClientRect().bottom
-
-    if (from.getBoundingClientRect().right > window.innerWidth / 2) {
-      this.menuLeft = 0
-      this.menuRight = window.innerWidth - from.getBoundingClientRect().right
-    } else {
-      this.menuLeft = from.getBoundingClientRect().left
-      this.menuRight = 0
-    }
-
-    this.showMenu = !this.showMenu
-
-    setTimeout(() => {
-      if (this.menuEl) {
-        if (this.menuEl.nativeElement.getBoundingClientRect().right > window.innerWidth) {
-          this.menuLeft = 0
-          this.menuRight = window.innerWidth - from.getBoundingClientRect().right
-        }
-      }
-    })
-  }
-
-  @HostListener('window:mouseup', ['$event'])
-  closeMenu(event: Event) {
-    if ((event.target as HTMLElement)?.className?.indexOf("menu") === -1) {
-      this.showMenu = false
-    } else {
-      setTimeout(() => {
-        this.showMenu = false
-      })
-    }
-  }
-
   @HostListener('window:keyup.escape')
   up() {
-    if (this.showMenu) {
-      this.showMenu = false
+    if (this.menu?.isOpen) {
+      this.menu?.close()
       return
     }
 

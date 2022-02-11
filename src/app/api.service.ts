@@ -38,6 +38,14 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/posts`, post)
   }
 
+  editPost(postId: string, post: any) {
+    return this.http.post<any>(`${this.base}/post/${this.key(postId)}`, post)
+  }
+
+  removePost(postId: string) {
+    return this.http.post<any>(`${this.base}/post/${this.key(postId)}/remove`, null)
+  }
+
   createLocation(location: any) {
     return this.http.post<any>(`${this.base}/locations`, location)
   }

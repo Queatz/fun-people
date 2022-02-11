@@ -36,6 +36,41 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.destroyed.complete()
   }
 
+  menuItems(post: any) {
+    return () => [
+      {
+        name: 'Edit', callback: () => {
+          const text = prompt('Post', post.text || '')
+
+          if (!text?.trim()) {
+            return
+          }
+
+          this.api.editPost(post.id, {text}).subscribe({
+            next: () => {
+              this.ui.changes.next(null)
+            },
+            error: err => {
+              alert(err.statusText)
+            }
+          })
+        }
+      },
+      {
+        name: 'Remove', callback: () => {
+          this.api.removePost(post.id).subscribe({
+            next: () => {
+              this.ui.changes.next(null)
+            },
+            error: err => {
+              alert(err.statusText)
+            }
+          })
+        }
+      }
+    ]
+  }
+
   showPerson(person: any) {
     alert(`${person.name}\n\n${person?.introduction}`)
   }

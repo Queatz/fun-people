@@ -1,0 +1,7 @@
+<div class="menu" #menu
+     [style.top]="menuTop + 'px'"
+     [style.left]="menuLeft ? menuLeft + 'px' : ''"
+     [style.right]="menuRight ? menuRight + 'px' : ''"
+     *ngIf="show">
+  <div class="menu-item" *ngFor="let item of menuItems" (click)="item.callback()">{{ item.name }}</div>
+</div>

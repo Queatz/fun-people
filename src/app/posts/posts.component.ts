@@ -69,4 +69,8 @@ export class PostsComponent implements OnInit, OnDestroy {
       }
     })
   }
+
+  imHere() {
+    return this.posts.some(x => x.personId === this.ui.me?.id)
+  }
 }

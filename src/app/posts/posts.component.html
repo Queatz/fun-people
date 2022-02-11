@@ -3,7 +3,7 @@
   <div class="card-text">{{ x.text }}</div>
   <input placeholder="Reply to {{ x.person?.name || 'Monkey' }}" />
 </div>
-<div class="footer" *ngIf="ui.location">
+<div class="footer" *ngIf="ui.location && !imHere()">
   <div class="link" (click)="createPost()">Add yourself in this location</div>
 </div>
 

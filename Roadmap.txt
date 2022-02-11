@@ -1,29 +1,30 @@
 
- [X] Search locations
-  [X] Auto-create location and parent locations
- [X] Load location
- [X] Authenticate
- [X] Create post
- [X] Load posts
- [X] Edit location
- [X] Edit me
- [ ] Send message
- [ ] Load messages
- [ ] Websocket messages
- [ ] Sounds
+General
+=======
 
- [ ] Email about unread messages (after 1hr)
- [ ] Typing indicator
+ [ ] FEAT  limit all list endpoints to 20
+ [ ] BUG   Don't return email for people on all calls
 
- [ ] Favorite or pin locations
- [ ] Preload with top cities
- [ ] Don't allow posting 2wice to the same location
- [ ] Location edit history
+Locations
+=========
 
- [ ] limit all list endpoints to 20
- [ ] Don't show "Add yourself in this location" if you already are in it
+ [ ] FEAT  Preload the world with top+random cities /location-top
+ [ ] FEAT  Location edit history
+ [ ] BUG   Disallow posting twice to the same location
+ [ ] FEAT  Edit, delete my posts
 
- [ ] Edit, delete my posts
+Messaging
+=========
 
- [ ] Don't return email for people on all calls
- [ ] Temporarily mute posts
+ [ ] FEAT  Email about unread messages (after 1hr)
+ [ ] FEAT  Typing indicator
+ [ ] FEAT  Send message
+ [ ] FEAT  Load messages
+ [ ] FEAT  Websocket messages
+ [ ] FEAT  Sounds
+
+Settings & Profile
+==================
+
+ [ ] FEAT Favorite or pin locations
+ [ ] FEAT Temporarily mute posts

@@ -34,6 +34,10 @@ export class ApiService {
     return this.http.get<any>(`${this.base}/location/${this.key(locationId)}/locations`)
   }
 
+  topLocations() {
+    return this.http.get<any>(`${this.base}/top-locations`)
+  }
+
   createPost(post: any) {
     return this.http.post<any>(`${this.base}/posts`, post)
   }

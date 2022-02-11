@@ -123,12 +123,31 @@ export class DetailsComponent implements OnInit, OnDestroy {
     if (!url) {
       this.loading = false
       this.ui.location = undefined
+
+      this.api.topLocations().pipe(
+        takeUntil(this.destroyed)
+      ).subscribe({
+        next: (locations: Array<any>) => {
+          this.locations = locations
+        },
+        error: err => {
+          alert(err.statusText)
+        },
+        complete: () => {
+          this.loading = false
+
+          this.cr.detectChanges()
+        }
+      })
+
       return
     }
 
     this.loading = true
 
-    this.api.locationByUrl(url).subscribe({
+    this.api.locationByUrl(url).pipe(
+      takeUntil(this.destroyed)
+    ).subscribe({
       next: (location: any) => {
         this.ui.location = location
       },

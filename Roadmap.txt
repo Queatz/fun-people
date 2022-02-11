@@ -8,9 +8,9 @@ General
 Locations
 =========
 
- [ ] FEAT  Preload the world with top+random cities /location-top
+ [X] FEAT  Preload the world with top+random cities /location-top
  [ ] FEAT  Location edit history
- [ ] FEAT  Edit, delete my posts
+ [X] FEAT  Edit, delete my posts
 
 Messaging
 =========

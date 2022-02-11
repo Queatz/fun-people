@@ -8,7 +8,11 @@ export class ApiService {
 
   private base = "http://localhost:8080"
 
-  constructor(private http: HttpClient) { }
+  token?: string
+
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem("token") || undefined
+  }
 
   search(query: string) {
     return this.http.get<Array<any>>(`${this.base}/search/${query}`)
@@ -36,6 +40,31 @@ export class ApiService {
 
   createLocation(location: any) {
     return this.http.post<any>(`${this.base}/locations`, location)
+  }
+
+  signin(email: string, code?: string) {
+    return this.http.post<any>(`${this.base}/signin`, {
+      email,
+      code
+    })
+  }
+
+  me() {
+    return this.http.get<any>(`${this.base}/me`)
+  }
+
+  updateMe(me: any) {
+    return this.http.post<any>(`${this.base}/me`, me)
+  }
+
+  setAuth(token?: string) {
+    this.token = token
+
+    if (token) {
+      localStorage.setItem('token', token)
+    } else {
+      localStorage.removeItem('token')
+    }
   }
 
   private key(id: string) {

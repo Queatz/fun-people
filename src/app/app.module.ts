@@ -12,7 +12,8 @@ import { MessagingComponent } from './messaging/messaging.component';
 import {FormsModule} from "@angular/forms";
 import { LocationLinkComponent } from './location-link/location-link.component';
 import { LocationListComponent } from './location-list/location-list.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {AuthenticateInterceptor} from "./authenticate.interceptor";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import {HttpClientModule} from "@angular/common/http";
         AppRoutingModule,
         FormsModule
     ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

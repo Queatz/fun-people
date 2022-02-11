@@ -9,6 +9,11 @@ html, body {
   color: #202020;
 }
 
+a {
+  cursor: pointer;
+  color: palevioletred;
+}
+
 input:not([type]), input[type="text"] {
   border-radius: 2rem;
   border: 1px solid silver;
@@ -40,4 +45,10 @@ input:not([type]), input[type="text"] {
   font-weight: bold;
   margin-bottom: .25rem;
   font-size: 18px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid silver;
+  margin: 2rem 0;
 }

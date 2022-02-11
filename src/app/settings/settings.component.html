@@ -1,15 +1,23 @@
 <div>
-  <div class="title">
-    Settings
-  </div>
+  <div *ngIf="ui.me">
+    <div class="title">
+      Settings
+    </div>
 
-  <div class="settings">
-    <input placeholder="Your name" />
-  </div>
+    <div class="settings">
+      <input [(ngModel)]="ui.me.name" (ngModelChange)="ui.saveMe()" placeholder="Your name" />
+    </div>
 
-  <div class="title">
-    Your locations
-  </div>
+    <div class="title">
+      Your locations
+    </div>
 
-  <app-location-list></app-location-list>
+    <app-location-list></app-location-list>
+
+    <hr />
+  </div>
+  <div>
+    <a *ngIf="ui.me" (click)="ui.unauth()">Sign out</a>
+    <a *ngIf="!ui.me" (click)="ui.auth()">Sign in</a>
+  </div>
 </div>

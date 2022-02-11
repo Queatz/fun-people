@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, delay, Subscription} from "rxjs";
+import {BehaviorSubject, delay, of, Subscription, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 
@@ -36,8 +36,7 @@ export class UiService {
         },
         error: err => {
           if (err.status === 401) {
-            this.api.setAuth(undefined)
-            this.me = undefined
+            this.unauth()
           }
 
           alert(err.statusText)
@@ -46,36 +45,15 @@ export class UiService {
     }
   }
 
-  unauth() {
-    this.me = undefined
-
-    this.router.navigate(['/'])
-  }
-
-  auth() {
-    const email = prompt('Email')
-
-    if (!email?.trim()) {
-      return
-    }
-
-    this.api.signin(email).subscribe({
-      next: () => {
-        this.enterCode(email)
-      },
-      error: err => {
-        alert(err.statusText)
-      }
-    })
-  }
-
   saveMe() {
     this.updateMeSubscription?.unsubscribe()
 
-    this.updateMeSubscription = this.api.updateMe({
-      name: this.me.name
-    }).pipe(
-      delay(1000)
+    this.updateMeSubscription = of(null).pipe(
+      delay(1000),
+      switchMap(() => this.api.updateMe({
+        name: this.me.name,
+        introduction: this.me.introduction,
+      }))
     ).subscribe({
       next: me => {
         this.me = me
@@ -89,7 +67,31 @@ export class UiService {
     })
   }
 
-  private enterCode(email: string) {
+  unauth() {
+    this.api.setToken()
+    this.me = undefined
+
+    this.router.navigate(['/'])
+  }
+
+  auth(callback?: () => void) {
+    const email = prompt('Email')
+
+    if (!email?.trim()) {
+      return
+    }
+
+    this.api.signin(email).subscribe({
+      next: () => {
+        this.enterCode(email, callback)
+      },
+      error: err => {
+        alert(err.statusText)
+      }
+    })
+  }
+
+  private enterCode(email: string, callback?: () => void) {
     const code = prompt('Enter code from the email')
 
     if (!code?.trim()) {
@@ -98,12 +100,33 @@ export class UiService {
 
     this.api.signin(email, code).subscribe({
       next: result => {
-        this.api.setAuth(result.token)
+        this.api.setToken(result.token)
         this.me = result.person
+        callback?.()
       },
       error: err => {
         alert(err.statusText)
       }
     })
+  }
+
+  openLocation(location: any) {
+    if (!location) {
+      this.router.navigate(['/'])
+      return
+    }
+
+    if (location?.url) {
+      this.router.navigate([`/${location.url}`])
+    } else if (location?.path) {
+      this.api.locationByPath([ ...location.path.map((x: any) => x.name), location.name ]).subscribe({
+        next: (location: any) => {
+          this.router.navigate([`/${location.url}`])
+        },
+        error: err => {
+          alert(err.statusText)
+        }
+      })
+    }
   }
 }

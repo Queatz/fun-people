@@ -1,10 +1,10 @@
 <div class="card" *ngFor="let x of posts">
-  <div class="card-title">{{ x.person?.name || 'Monkey' }}</div>
+  <div class="card-title" (click)="showPerson(x.person)">{{ x.person?.name || 'Monkey' }}</div>
   <div class="card-text">{{ x.text }}</div>
   <input placeholder="Reply to {{ x.person?.name || 'Monkey' }}" />
 </div>
 <div class="footer" *ngIf="ui.location">
-  <div class="link" (click)="createPost()">Add yourself to this location</div>
+  <div class="link" (click)="createPost()">Add yourself in this location</div>
 </div>
 
 <div class="footer" *ngIf="!ui.location">

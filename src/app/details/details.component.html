@@ -1,9 +1,9 @@
-<div>
+<div *ngIf="!loading">
   <div class="header">
     <div class="title">
       {{ ui.location?.name || '🌏 The World' }}
     </div>
-    <div class="i" *ngIf="ui.location" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
+    <div class="i" *ngIf="ui.location && ui.me" #menuTrigger (click)="menu(menuTrigger)">⋮</div>
     <div class="menu" #menu
          [style.top]="menuTop + 'px'"
          [style.left]="menuLeft ? menuLeft + 'px' : ''"

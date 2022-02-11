@@ -15,9 +15,15 @@
  [ ] Email about unread messages (after 1hr)
  [ ] Typing indicator
 
- [ ]  Favorite or pin locations
+ [ ] Favorite or pin locations
  [ ] Preload with top cities
  [ ] Don't allow posting 2wice to the same location
  [ ] Location edit history
 
  [ ] limit all list endpoints to 20
+ [ ] Don't show "Add yourself in this location" if you already are in it
+
+ [ ] Edit, delete my posts
+
+ [ ] Don't return email for people on all calls
+ [ ] Temporarily mute posts

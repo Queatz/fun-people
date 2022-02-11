@@ -1,23 +1,25 @@
 <div>
   <div *ngIf="ui.me">
     <div class="title">
-      Settings
+      Profile
     </div>
+    <p>
+      {{ ui.me.email }}<br />
+      <a *ngIf="ui.me" (click)="ui.unauth()">Sign out</a>
+    </p>
 
     <div class="settings">
       <input [(ngModel)]="ui.me.name" (ngModelChange)="ui.saveMe()" placeholder="Your name" />
+      <textarea placeholder="Introduction" [(ngModel)]="ui.me.introduction" (ngModelChange)="ui.saveMe()"></textarea>
     </div>
 
     <div class="title">
       Your locations
     </div>
 
-    <app-location-list></app-location-list>
-
-    <hr />
+    <app-location-list [locations]="locations" empty="None" (selected)="open($event)"></app-location-list>
   </div>
   <div>
-    <a *ngIf="ui.me" (click)="ui.unauth()">Sign out</a>
     <a *ngIf="!ui.me" (click)="ui.auth()">Sign in</a>
   </div>
 </div>

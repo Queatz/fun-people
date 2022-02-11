@@ -7,6 +7,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class LocationListComponent implements OnInit {
 
+  @Input() empty = ''
   @Input() locations: Array<any> = []
   @Output() selected = new EventEmitter<any>()
 

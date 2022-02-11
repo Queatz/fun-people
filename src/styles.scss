@@ -14,12 +14,20 @@ a {
   color: palevioletred;
 }
 
-input:not([type]), input[type="text"] {
-  border-radius: 2rem;
+input:not([type]), input[type="text"], textarea {
+  border-radius: 1rem;
   border: 1px solid silver;
   padding: .5rem 1rem;
   box-sizing: border-box;
   width: 100%;
+}
+
+textarea {
+  margin-top: .5rem;
+  resize: none;
+  font-family: inherit;
+  padding: 1rem !important;
+  height: 8rem;
 }
 
 .i {
@@ -45,6 +53,10 @@ input:not([type]), input[type="text"] {
   font-weight: bold;
   margin-bottom: .25rem;
   font-size: 18px;
+}
+
+.secondary {
+  color: silver;
 }
 
 hr {

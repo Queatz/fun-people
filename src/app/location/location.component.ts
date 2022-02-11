@@ -1,21 +1,40 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UiService} from "../ui.service";
+import {Subject, takeUntil} from "rxjs";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-location',
   templateUrl: './location.component.html',
   styleUrls: ['./location.component.scss']
 })
-export class LocationComponent implements OnInit, AfterViewInit {
+export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('nav', { static: false })
   navEl!: ElementRef
 
   content: 'location' | 'messages' = 'location'
-  show: 'details' | 'messages' | 'notifications' | 'settings' = 'details'
+  show: 'details' | 'messages' | 'notifications' | 'settings' | 'loading' = 'loading'
 
-  constructor() { }
+  private readonly destroyed = new Subject<void>()
+
+  constructor(public ui: UiService, private route: ActivatedRoute, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.route.paramMap.pipe(
+      takeUntil(this.destroyed)
+    ).subscribe({
+      next: () => {
+        this.show = 'details'
+
+        this.cr.detectChanges()
+      }
+    })
+  }
+
+  ngOnDestroy() {
+    this.destroyed.next()
+    this.destroyed.complete()
   }
 
   ngAfterViewInit() {

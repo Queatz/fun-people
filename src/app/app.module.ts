@@ -14,6 +14,7 @@ import { LocationLinkComponent } from './location-link/location-link.component';
 import { LocationListComponent } from './location-list/location-list.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticateInterceptor} from "./authenticate.interceptor";
+import { PersonComponent } from './person/person.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {AuthenticateInterceptor} from "./authenticate.interceptor";
     PostsComponent,
     MessagingComponent,
     LocationLinkComponent,
-    LocationListComponent
+    LocationListComponent,
+    PersonComponent
   ],
     imports: [
         BrowserModule,

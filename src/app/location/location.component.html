@@ -1,13 +1,13 @@
 <div class="root">
   <div class="nav" #nav>
     <div class="locations" [ngSwitch]="show">
-      <app-details *ngSwitchCase="'details'"></app-details>
+      <app-details *ngSwitchCase="'details'" (locationChanged)="show = 'details'"></app-details>
       <app-messages *ngSwitchCase="'messages'" (selected)="content = 'messages'"></app-messages>
       <app-settings *ngSwitchCase="'settings'"></app-settings>
     </div>
     <div class="controls">
       <div class="i" (click)="content = 'location'; show = 'details'">🌏</div>
-      <div class="i" (click)="show = 'messages'">📬<span class="red-dot">•</span></div>
+      <div class="i" *ngIf="ui.me" (click)="show = 'messages'">📬<span class="red-dot">•</span></div>
       <div class="i" (click)="show = 'settings'">🤠</div>
     </div>
   </div>

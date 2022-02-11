@@ -3,4 +3,7 @@
     <div class="item-name">{{ x.name }}</div>
     <div class="item-description">{{ x.description }}</div>
   </div>
+  <div class="secondary" *ngIf="!locations.length && empty">
+    {{ empty }}
+  </div>
 </div>

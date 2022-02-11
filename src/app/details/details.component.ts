@@ -1,6 +1,15 @@
-import {ChangeDetectorRef, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef, EventEmitter,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {ApiService} from "../api.service";
-import {delay, filter, Subject, Subscription, switchMap, takeUntil} from "rxjs";
+import {delay, filter, of, Subject, Subscription, switchMap, takeUntil} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UiService} from "../ui.service";
 
@@ -11,6 +20,8 @@ import {UiService} from "../ui.service";
 })
 export class DetailsComponent implements OnInit, OnDestroy {
 
+  @Output() locationChanged = new EventEmitter<void>()
+
   showMenu = false
   menuTop = 0
   menuLeft = 0
@@ -19,11 +30,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   @ViewChild('menu', { static: false })
   menuEl?: ElementRef
 
+  loading = true
   searchQuery = ''
   locations: Array<any> = []
 
   private searchObservable?: Subscription
-  private destroyed = new Subject()
+  private readonly destroyed = new Subject<void>()
 
   constructor(public ui: UiService, private api: ApiService, private route: ActivatedRoute, private router: Router, private cr: ChangeDetectorRef) { }
 
@@ -32,12 +44,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed)
     ).subscribe({
       next: params => {
-        const l = params.get('location')
-        if (l) {
-          this.setLocationUrl(l)
-        } else {
-          this.ui.location = undefined
-        }
+        const l = params.get('location') || undefined
+        this.setLocationUrl(l)
+        this.locationChanged.next()
+
         this.cr.detectChanges()
       }
     })
@@ -57,7 +67,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyed.next(null)
+    this.destroyed.next()
     this.destroyed.complete()
   }
 
@@ -117,8 +127,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       return
     }
 
-    this.searchObservable = this.api.search(this.searchQuery).pipe(
-      delay(100)
+    this.searchObservable = of(null).pipe(
+      delay(100),
+      switchMap(() => this.api.search(this.searchQuery))
     ).subscribe({
       next: results => {
         this.locations = results.map(x => ({
@@ -137,30 +148,17 @@ export class DetailsComponent implements OnInit, OnDestroy {
   }
 
   open(location?: any) {
-    if (!location) {
-      this.router.navigate(['/'])
-      return
-    }
-
-    if (location?.url) {
-      this.router.navigate([`/${location.url}`])
-    } else if (location?.path) {
-      this.api.locationByPath([ ...location.path.map((x: any) => x.name), location.name ]).subscribe({
-        next: (location: any) => {
-          this.router.navigate([`/${location.url}`])
-        },
-        error: err => {
-          alert(err.statusText)
-        }
-      })
-    }
+    this.ui.openLocation(location)
   }
 
   setLocationUrl(url?: string) {
     if (!url) {
-      this.ui.location = ''
+      this.loading = false
+      this.ui.location = undefined
       return
     }
+
+    this.loading = true
 
     this.api.locationByUrl(url).subscribe({
       next: (location: any) => {
@@ -168,6 +166,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
       },
       error: err => {
         alert(err.statusText)
+      },
+      complete: () => {
+        this.loading = false
+
+        this.cr.detectChanges()
       }
     })
   }

@@ -12,7 +12,7 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   posts: Array<any> = []
 
-  private destroyed = new Subject()
+  private readonly destroyed = new Subject<void>()
 
   constructor(public ui: UiService, private api: ApiService, private cr: ChangeDetectorRef) { }
 
@@ -32,11 +32,25 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.destroyed.next(null)
+    this.destroyed.next()
     this.destroyed.complete()
   }
 
+  showPerson(person: any) {
+    alert(`${person.name}\n\n${person?.introduction}`)
+  }
+
   createPost() {
+    if (!this.ui.me) {
+      alert('Sign in to post')
+
+      this.ui.auth(() => {
+        this.createPost()
+      })
+
+      return
+    }
+
     const text = prompt("Post")
 
     if (!text?.trim()) {

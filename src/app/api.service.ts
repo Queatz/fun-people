@@ -53,6 +53,10 @@ export class ApiService {
     return this.http.get<any>(`${this.base}/me`)
   }
 
+  postsByMe() {
+    return this.http.get<any>(`${this.base}/me/posts`)
+  }
+
   updateMe(me: any) {
     return this.http.post<any>(`${this.base}/me`, me)
   }
@@ -61,7 +65,7 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/location/${this.key(locationId)}`, location)
   }
 
-  setAuth(token?: string) {
+  setToken(token?: string) {
     this.token = token
 
     if (token) {

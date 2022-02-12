@@ -1,7 +1,17 @@
 import {ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {UiService} from "../ui.service";
 import {ApiService} from "../api.service";
-import {BehaviorSubject, delay, distinctUntilChanged, of, Subject, Subscription, takeUntil, throttleTime} from "rxjs";
+import {
+  BehaviorSubject,
+  delay,
+  distinctUntilChanged,
+  filter,
+  of,
+  Subject,
+  Subscription,
+  takeUntil,
+  throttleTime
+} from "rxjs";
 import {MessagingService} from "../messaging.service";
 import {formatDistanceToNow} from "date-fns";
 
@@ -29,7 +39,8 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnInit(): void {
     this.messaging.messagesObservable.pipe(
-      takeUntil(this.destroyed)
+      takeUntil(this.destroyed),
+      filter(message => message.groupId === this.group.id)
     ).subscribe(message => {
       if (message.typing !== undefined) {
         if (message.typing) {
@@ -44,7 +55,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
           this.typing = ''
           this.typingExpiration = undefined
         })
-      } else if (message.groupId === this.group.id) {
+      } else {
         this.messages.unshift(message)
       }
     })

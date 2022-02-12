@@ -35,14 +35,16 @@ export class MessagingService {
         next: message => {
           const group = this.groups.find(x => x.id === message.groupId)
 
-          if (group) {
-            group.latest = message
+          if (message.typing === undefined) {
+            if (group) {
+              group.latest = message
 
-            if (this.observations.get(message.groupId)) {
-              const member = this.getMyMember(group)
+              if (this.observations.get(message.groupId)) {
+                const member = this.getMyMember(group)
 
-              if (member) {
-                member.readUntil = message.createdAt
+                if (member) {
+                  member.readUntil = message.createdAt
+                }
               }
             }
           }

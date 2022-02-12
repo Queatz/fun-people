@@ -39,26 +39,18 @@ export class MessagesComponent implements OnInit {
   }
 
   name(group: any) {
-    return this.getOtherMember(group).person?.name
+    return this.messaging.getOtherMember(group).person?.name
   }
 
   isUnread(group: any) {
-    return isBefore(new Date(this.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
+    return isBefore(new Date(this.messaging.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
   }
 
   colorGroup(group: any) {
-    return this.colorMember(this.getOtherMember(group))
+    return this.colorMember(this.messaging.getOtherMember(group))
   }
 
   colorMember(member: any) {
     return this.messaging.colorPerson(member.personId)
-  }
-
-  private getOtherMember(group: any) {
-    return group.members.find((x: any) => x.personId !== this.ui.me.id)
-  }
-
-  private getMyMember(group: any) {
-    return group.members.find((x: any) => x.personId === this.ui.me.id)
   }
 }

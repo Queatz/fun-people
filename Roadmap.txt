@@ -1,6 +1,7 @@
 
  [ ] BUG  editing a place doesn't return parent location
  [ ] BUG  Not found -> redirect to home
+ [ ] BUG  Clear ALL state when logging out
 
  [ ] FunPeople -> Hangoutville.com
 
@@ -14,6 +15,7 @@ Messaging
  [ ] FEAT  Websocket messages
  [ ] FEAT  Colors from Closer
  [ ] FEAT  Sounds
+ [ ] FEAT  Leave group message
 
 Next
 ====

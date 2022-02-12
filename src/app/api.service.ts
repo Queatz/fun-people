@@ -1,17 +1,22 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private base = "http://localhost:8080"
+  private base = 'http://localhost:8080'
 
   token?: string
 
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem("token") || undefined
+  }
+
+  ws(): WebSocketSubject<any> {
+    return webSocket(`${this.base.replace('http', 'ws')}/ws`)
   }
 
   search(query: string) {

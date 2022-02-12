@@ -22,6 +22,13 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
   constructor(public ui: UiService, private api: ApiService, private messaging: MessagingService, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
+    this.messaging.messagesObservable.pipe(
+      takeUntil(this.destroyed)
+    ).subscribe(message => {
+      if (message.groupId === this.group.id) {
+        this.messages.unshift(message)
+      }
+    })
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -47,7 +54,12 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   send() {
-    // this.api.sendMessage()
+    if (!this.group) {
+      alert('There was an error')
+      return
+    }
+
+    this.messaging.sendMessage(this.group.id, this.sendMessage)
 
     this.sendMessage = ''
   }

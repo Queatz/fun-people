@@ -2,7 +2,7 @@
   <div class="nav" #nav>
     <div class="locations" [ngSwitch]="show">
       <app-details *ngSwitchCase="'details'" (locationChanged)="show = 'details'"></app-details>
-      <app-messages *ngSwitchCase="'messages'" (selected)="content = 'messages'"></app-messages>
+      <app-messages *ngSwitchCase="'messages'" (selected)="showMessages($event)"></app-messages>
       <app-settings *ngSwitchCase="'settings'"></app-settings>
     </div>
     <div class="controls">
@@ -13,6 +13,6 @@
   </div>
   <div class="content" [ngSwitch]="content">
     <app-posts *ngSwitchCase="'location'"></app-posts>
-    <app-messaging *ngSwitchCase="'messages'"></app-messaging>
+    <app-messaging *ngSwitchCase="'messages'" [group]="messagesGroup"></app-messaging>
   </div>
 </div>

@@ -77,6 +77,14 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/me`, me)
   }
 
+  groups() {
+    return this.http.get<Array<any>>(`${this.base}/groups`)
+  }
+
+  groupMessages(groupId: string) {
+    return this.http.get<Array<any>>(`${this.base}/group/${this.key(groupId)}/messages`)
+  }
+
   updateLocation(locationId: string, location: any) {
     return this.http.post<any>(`${this.base}/location/${this.key(locationId)}`, location)
   }

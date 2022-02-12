@@ -16,6 +16,8 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
   content: 'location' | 'messages' = 'location'
   show: 'details' | 'messages' | 'notifications' | 'settings' | 'loading' = 'loading'
 
+  messagesGroup?: any
+
   private readonly destroyed = new Subject<void>()
 
   constructor(public ui: UiService, private route: ActivatedRoute, private cr: ChangeDetectorRef) { }
@@ -41,4 +43,8 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
     this.navEl.nativeElement.scrollY = 0
   }
 
+  showMessages(group: any) {
+    this.messagesGroup = group
+    this.content = 'messages'
+  }
 }

@@ -1,15 +1,15 @@
 <div class="layout">
   <div class="messaging">
-    <div class="message" [ngClass]="{ 'reverse': x[3] }" *ngFor="let x of messages">
+    <div class="message" [ngClass]="{ 'reverse': x.personId === ui.me.id }" *ngFor="let x of messages; let i = index">
       <div class="photo-holder">
-        <div class="photo" *ngIf="x[2]">M</div>
+        <div class="photo" [title]="x.person.name" [style.background-color]="colorPerson(x.person.id)" *ngIf="showPhoto(i)">{{ x.person.name[0] }}</div>
       </div>
       <div class="content">
         <div class="body">
-          {{ x[0] }}
+          {{ x.text }}
         </div>
-        <div *ngIf="x[1]" class="info">
-          {{ x[1] }}
+        <div *ngIf="x.location" class="info">
+          Sent from {{ x.location.name }}
         </div>
       </div>
     </div>

@@ -18,6 +18,7 @@ Messaging
 Next
 ====
 
+ [ ] Persist logins after server restart
  [ ] FEAT Remember my last location in localStorage
  [ ] FEAT Favorite or pin locations
  [ ] FEAT Temporarily mute posts

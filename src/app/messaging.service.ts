@@ -4,7 +4,7 @@ import {hashCode} from "./util";
 import {UiService} from "./ui.service";
 import {ApiService} from "./api.service";
 import {WebSocketSubject} from "rxjs/webSocket";
-import {filter, Subject} from "rxjs";
+import {Subject} from "rxjs";
 import {isBefore} from "date-fns";
 
 @Injectable({
@@ -18,7 +18,9 @@ export class MessagingService {
     return !!this.groups.find(x => this.isUnread(x))
   }
 
-  private ws!: WebSocketSubject<any>
+  private ws?: WebSocketSubject<any>
+
+  private observations = new Map<string, number>()
 
   readonly messagesObservable = new Subject<any>()
 
@@ -28,29 +30,57 @@ export class MessagingService {
   ) {
     const reconnect = () => {
       this.ws = this.api.ws()
+
+      this.ws.asObservable().subscribe({
+        next: message => {
+          const group = this.groups.find(x => x.id === message.groupId)
+
+          if (group) {
+            group.latest = message
+
+            if (this.observations.get(message.groupId)) {
+              const member = this.getMyMember(group)
+
+              if (member) {
+                member.readUntil = message.createdAt
+              }
+            }
+          }
+
+          this.messagesObservable.next(message)
+        },
+        error: err => {
+          console.log(err)
+          setTimeout(() => {
+            if (this.api.token) {
+              reconnect()
+            } else {
+              this.ws = undefined
+            }
+          }, 2000)
+        },
+        complete: () => {
+          if (this.api.token) {
+            reconnect()
+          } else {
+            this.ws = undefined
+          }
+        }
+      })
     }
 
-    reconnect()
-
-    this.api.authenticated.pipe(
-      filter(x => x)
-    ).subscribe(() => {
-      this.ws.next({ token: api.token })
-      this.reload()
-    })
-
-    this.ws.asObservable().subscribe({
-      next: data => {
-        this.messagesObservable.next(data)
-      },
-      error: err => {
-        console.log(err)
-        setTimeout(() => {
+    this.api.authenticated.subscribe(authenticated => {
+      if (authenticated) {
+        if (this.ws?.closed !== false) {
           reconnect()
-        }, 2000)
-      },
-      complete: () => {
-        reconnect()
+        }
+
+        this.ws!.next({token: api.token})
+
+        this.reload()
+      } else {
+        this.ws?.complete()
+        this.ws?.unsubscribe()
       }
     })
   }
@@ -79,7 +109,7 @@ export class MessagingService {
   }
 
   sendMessage(groupId: string, text: string) {
-    this.ws.next({ groupId, text })
+    this.ws?.next({ groupId, text })
   }
 
   isUnread(group: any) {
@@ -92,5 +122,29 @@ export class MessagingService {
 
   name(group: any) {
     return this.getOtherMember(group).person?.name
+  }
+
+  observing(groupId: string, isObserving: boolean) {
+    const observations = this.observations.get(groupId) || 0
+
+    if (isObserving) {
+      this.updateGroupReadUntil(groupId)
+
+      this.observations.set(groupId, observations + 1)
+    } else if (observations > 0) {
+      this.observations.set(groupId, observations - 1)
+    }
+  }
+
+  private updateGroupReadUntil(groupId: string) {
+    const group = this.groups.find(x => x.id === groupId)
+
+    if (group) {
+      const member = this.getMyMember(group)
+
+      if (member) {
+        member.readUntil = group.latest.createdAt
+      }
+    }
   }
 }

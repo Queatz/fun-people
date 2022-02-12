@@ -9,30 +9,27 @@ Incoming
 Bugs
 ====
 
- [ ] BUG  401 -> logout except when signing in
- [ ] BUG  incoming messages should make the red dot visible right away even when not on the messages screen
- [ ] AQL write-write conflict
-
-Messaging
 =========
 
  [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT  Typing indicator
  [ ] FEAT  Messaging Sounds
  [ ] FEAT  Leave message group
+  [ ] Sends message "Person left the chat"
 
 Next
 ====
 
  [ ] FEAT Persist logins across server restart
- [ ] FEAT Temporarily mute posts (vs. removing)
- [ ] FEAT Location edit history (view it)
- [ ] FEAT Show number of people in the hangouts
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 
-Later
+Post Launch
 =====
 
+ [ ] FEAT Show number of people in the hangouts
+ [ ] FEAT Location edit history (view it)
+ [ ] FEAT Temporarily mute posts (vs. removing)
  [ ] FEAT Manage who can be in the various locations that I own
- [ ] Dark mode
+ [ ] FEAT Dark mode
  [ ] FEAT Favorite or pin locations
+ [ ] Report spam

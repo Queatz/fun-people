@@ -31,8 +31,14 @@
 .message {
   display: inline-flex;
   margin-top: .5rem;
+  word-break: break-word;
+
   @media screen and (min-width: 960px) {
     max-width: 50%;
+  }
+
+  @media screen and (max-width: 959px) {
+    max-width: calc(100% - 4rem);
   }
 
   &.reverse {
@@ -84,6 +90,8 @@
     align-items: center;
     color: white;
     font-size: 12px;
+    overflow: hidden;
+    white-space: nowrap;
 
     border-radius: 3rem;
 

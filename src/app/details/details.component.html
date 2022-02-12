@@ -1,4 +1,4 @@
-<div *ngIf="!loading">
+<div *ngIf="!loading" class="wrapper">
   <div class="header">
     <div class="title">
       {{ ui.location?.name || '🌏 Earth' }}
@@ -9,7 +9,7 @@
   <div class="in" (click)="open(ui.location?.path?.[0])">
     {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 Earth' : '🌠 Outer space' }}
   </div>
-  <div class="description">
+  <div class="description" [style.text-align]="ui.location?.description?.length > 128 ? 'justify' : 'inherit'">
     {{ ui.location ? ui.location?.description : '' }}
   </div>
   <div class="search" *ngIf="!ui.location">

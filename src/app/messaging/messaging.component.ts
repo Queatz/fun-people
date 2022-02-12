@@ -46,10 +46,17 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
           alert(err.statusText)
         }
       })
+
+      if (!changes['group'].isFirstChange() && changes['group'].currentValue !== changes['group'].previousValue) {
+        this.messaging.observing(changes['group'].previousValue, false)
+      }
+
+      this.messaging.observing(this.group.id, true)
     }
   }
 
   ngOnDestroy() {
+    this.messaging.observing(this.group.id, false)
     this.destroyed.next()
     this.destroyed.complete()
   }

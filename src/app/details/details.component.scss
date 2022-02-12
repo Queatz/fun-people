@@ -1,12 +1,24 @@
+.wrapper {
+  flex-direction: column;
+  display: flex;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .title {
+    width: 0;
+    word-break: break-word;
+  }
 }
 
 .description {
   font-size: 14px;
   margin: 1rem 0;
+  word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .search {
@@ -17,7 +29,9 @@
   font-size: 14px;
   color: gray;
   cursor: pointer;
-  display: inline-flex;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   &:hover {
     text-decoration: underline;

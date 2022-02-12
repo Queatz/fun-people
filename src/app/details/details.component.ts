@@ -9,7 +9,7 @@ import {
   ViewChild
 } from '@angular/core';
 import {ApiService} from "../api.service";
-import {delay, filter, of, Subject, Subscription, switchMap, takeUntil} from "rxjs";
+import {delay, filter, of, Subject, Subscription, switchMap, takeUntil, tap} from "rxjs";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UiService} from "../ui.service";
 import {MenuComponent} from "../menu/menu.component";
@@ -58,6 +58,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.ui.changes.pipe(
       takeUntil(this.destroyed),
       filter(() => !!this.ui.location),
+      tap(() => {
+        this.locations = []
+        this.cr.detectChanges()
+      }),
       switchMap(() => this.api.locationsOf(this.ui.location?.id))
     ).subscribe({
       next: locations => {

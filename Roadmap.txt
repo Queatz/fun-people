@@ -2,8 +2,7 @@
 Incoming
 ========
 
- [ ] POL  favicon
- [ ] Deploy, ssl
+ [ ] INFR Deploy, ssl
 
 Bugs
 ====

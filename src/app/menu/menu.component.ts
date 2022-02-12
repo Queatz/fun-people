@@ -13,6 +13,7 @@ export class MenuComponent implements OnInit {
 
   show = false
   menuTop = 0
+  menuBottom = 0
   menuLeft = 0
   menuRight = 0
 
@@ -31,7 +32,13 @@ export class MenuComponent implements OnInit {
   open(from: HTMLElement) {
     this.menuItems = this.items()
 
-    this.menuTop = from.getBoundingClientRect().bottom
+    if (from.getBoundingClientRect().bottom < window.innerHeight / 2) {
+      this.menuTop = from.getBoundingClientRect().bottom
+      this.menuBottom = 0
+    } else {
+      this.menuTop = 0
+      this.menuBottom = window.innerHeight - from.getBoundingClientRect().top
+    }
 
     if (from.getBoundingClientRect().right > window.innerWidth / 2) {
       this.menuLeft = 0
@@ -63,7 +70,9 @@ export class MenuComponent implements OnInit {
       return
     }
 
-    if ((event.target as HTMLElement)?.className?.indexOf("menu") === -1) {
+    const isInMenu = this.menuEl?.nativeElement?.contains((event.target as HTMLElement))
+
+    if (!isInMenu) {
         this.show = false
     } else {
       setTimeout(() => {

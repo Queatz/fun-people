@@ -14,6 +14,7 @@ import {
 } from "rxjs";
 import {MessagingService} from "../messaging.service";
 import {formatDistanceToNow} from "date-fns";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-messaging',
@@ -30,12 +31,31 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   typing = ''
 
-  private typingExpiration?: Subscription
+  menuOptions = () => [{
+    name: 'Leave', callback: () => {
+      if (!this.group.id) {
+        return
+      }
 
+      this.api.leaveGroup(this.group.id).pipe(
+        takeUntil(this.destroyed)
+      ).subscribe({
+        next: () => {
+          this.router.navigate(['/'])
+        },
+        error: err => {
+          alert(err.statusText)
+        }
+      })
+    }
+  }]
+
+  private typingExpiration?: Subscription
   private readonly destroyed = new Subject<void>()
   private readonly typingDebounce = new BehaviorSubject<boolean>(false)
 
-  constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private router: Router, private cr: ChangeDetectorRef) {
+  }
 
   ngOnInit(): void {
     this.messaging.messagesObservable.pipe(
@@ -122,7 +142,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   colorPerson(personId: string) {
-      return this.messaging.colorPerson(personId)
+    return this.messaging.colorPerson(personId)
   }
 
   showPerson(person: any) {
@@ -130,7 +150,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   sentAt(message: any) {
-    return formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })
+    return formatDistanceToNow(new Date(message.createdAt), {addSuffix: true})
   }
 
   sendTyping() {

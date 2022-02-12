@@ -98,8 +98,8 @@ export class MessagingService {
     })
   }
 
-  colorPerson(personId: string) {
-    return ColorTranslator.toRGB({ h: Math.abs(hashCode(personId) % 360), s: '50%', l: '50%' })
+  colorPerson(personId?: string) {
+    return ColorTranslator.toRGB({ h: Math.abs(hashCode(personId || '') % 360), s: personId ? '50%' : '0%', l: '50%' })
   }
 
   getOtherMember(group: any) {
@@ -123,11 +123,11 @@ export class MessagingService {
   }
 
   initial(group: any) {
-    return this.name(group)[0]
+    return this.name(group)?.[0]
   }
 
   name(group: any) {
-    return this.getOtherMember(group).person?.name
+    return this.getOtherMember(group)?.person?.name || 'Nobody'
   }
 
   observing(groupId: string, isObserving: boolean) {

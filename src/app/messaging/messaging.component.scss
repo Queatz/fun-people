@@ -24,8 +24,17 @@
 
   .send-message {
     flex-shrink: 0;
-
+    display: flex;
     padding: 1rem;
+
+    input {
+      width: 0;
+      flex-grow: 1;
+    }
+
+    .i {
+      margin-left: .5rem;
+    }
   }
 }
 
@@ -55,19 +64,26 @@
     flex-direction: row-reverse;
     align-self: end;
 
+    .content {
+      align-items: end;
+    }
+
     .photo-holder {
       margin-left: .5rem;
     }
   }
 
   &:not(.reverse) {
+    .content {
+      align-items: start;
+    }
+
     .photo-holder {
       margin-right: .5rem;
     }
   }
 
   .content {
-    align-items: start;
     display: inline-flex;
     flex-direction: column;
 

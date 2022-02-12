@@ -26,6 +26,6 @@ export class MessagesComponent implements OnInit {
   }
 
   colorMember(member: any) {
-    return this.messaging.colorPerson(member.personId)
+    return this.messaging.colorPerson(member?.personId)
   }
 }

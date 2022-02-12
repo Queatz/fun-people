@@ -1,7 +1,7 @@
 <div class="layout">
   <div class="messaging">
     <div class="message" [ngClass]="{ 'reverse': x.personId === ui.me.id }" *ngFor="let x of messages; let i = index">
-      <div class="photo-holder">
+      <div class="photo-holder" *ngIf="x.personId !== ui.me.id">
         <div class="photo" (click)="showPerson(x.person)" [title]="x.person.name" [style.background-color]="colorPerson(x.person.id)" *ngIf="showPhoto(i)">{{ x.person.name[0] }}</div>
       </div>
       <div class="content">
@@ -19,5 +19,7 @@
   </div>
   <div class="send-message">
     <input [(ngModel)]="sendMessage" (ngModelChange)="sendTyping()" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
+    <div class="i" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
+    <app-menu #menu [items]="menuOptions"></app-menu>
   </div>
 </div>

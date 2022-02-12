@@ -104,6 +104,10 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/location/${this.key(locationId)}`, location)
   }
 
+  leaveGroup(groupId: string) {
+    return this.http.post<any>(`${this.base}/group/${this.key(groupId)}/leave`, null)
+  }
+
   sendIdea(idea: any) {
     return this.http.post<any>(`${this.base}/ideas`, idea)
   }

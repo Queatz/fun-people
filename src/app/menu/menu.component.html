@@ -1,7 +1,8 @@
 <div class="menu" #menu
-     [style.top]="menuTop + 'px'"
-     [style.left]="menuLeft ? menuLeft + 'px' : ''"
-     [style.right]="menuRight ? menuRight + 'px' : ''"
+     [style.top]="menuTop ? menuTop + 'px' : undefined"
+     [style.bottom]="menuBottom ? menuBottom + 'px' : undefined"
+     [style.left]="menuLeft ? menuLeft + 'px' : undefined"
+     [style.right]="menuRight ? menuRight + 'px' : undefined"
      *ngIf="show">
   <div class="menu-item" *ngFor="let item of menuItems" (click)="item.callback()">{{ item.name }}</div>
 </div>

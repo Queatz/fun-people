@@ -3,6 +3,7 @@ import {UiService} from "../ui.service";
 import {ApiService} from "../api.service";
 import {Subject, takeUntil} from "rxjs";
 import {MessagingService} from "../messaging.service";
+import {formatDistanceToNow, formatDistanceToNowStrict} from "date-fns";
 
 @Component({
   selector: 'app-messaging',
@@ -19,7 +20,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   private readonly destroyed = new Subject<void>()
 
-  constructor(public ui: UiService, private api: ApiService, private messaging: MessagingService, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.messaging.messagesObservable.pipe(
@@ -74,5 +75,9 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   showPerson(person: any) {
     alert(`${person.name}\n\n${person.introduction}`)
+  }
+
+  sentAt(message: any) {
+    return formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })
   }
 }

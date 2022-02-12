@@ -15,7 +15,6 @@ export class MessagingService {
   groups: Array<any> = []
 
   get hasUnread() {
-    const now = new Date()
     return !!this.groups.find(x => this.isUnread(x))
   }
 
@@ -65,5 +64,13 @@ export class MessagingService {
 
   isUnread(group: any) {
     return isBefore(new Date(this.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
+  }
+
+  initial(group: any) {
+    return this.name(group)[0]
+  }
+
+  name(group: any) {
+    return this.getOtherMember(group).person?.name
   }
 }

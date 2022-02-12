@@ -5,7 +5,7 @@
         <div class="photo" (click)="showPerson(x.person)" [title]="x.person.name" [style.background-color]="colorPerson(x.person.id)" *ngIf="showPhoto(i)">{{ x.person.name[0] }}</div>
       </div>
       <div class="content">
-        <div class="body">
+        <div class="body" [title]="sentAt(x)">
           {{ x.text }}
         </div>
         <div *ngIf="x.location" class="info">
@@ -15,6 +15,6 @@
     </div>
   </div>
   <div class="send-message">
-    <input [(ngModel)]="sendMessage" (keydown.enter)="send()" placeholder="Reply" />
+    <input [(ngModel)]="sendMessage" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
   </div>
 </div>

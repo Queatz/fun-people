@@ -5,7 +5,7 @@
 
  [ ] FunPeople -> Hangoutville.com
  [ ] favicon
- [ ] red dot on messages tab
+ [ ] test all dynamic texts with loooooong content
 
 Messaging
 =========

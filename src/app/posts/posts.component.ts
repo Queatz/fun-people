@@ -121,7 +121,7 @@ export class PostsComponent implements OnInit, OnDestroy {
       takeUntil(this.destroyed)
     ).subscribe({
       next: () => {
-        alert('Your message was sent')
+        alert('Your message has been sent')
       },
       error: err => {
         alert(err.statusText)

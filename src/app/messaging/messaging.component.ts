@@ -71,4 +71,8 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
   colorPerson(personId: string) {
       return this.messaging.colorPerson(personId)
   }
+
+  showPerson(person: any) {
+    alert(`${person.name}\n\n${person.introduction}`)
+  }
 }

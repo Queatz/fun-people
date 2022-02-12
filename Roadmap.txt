@@ -4,6 +4,8 @@
  [ ] BUG  Clear ALL state when logging out
 
  [ ] FunPeople -> Hangoutville.com
+ [ ] favicon
+ [ ] red dot on messages tab
 
 Messaging
 =========

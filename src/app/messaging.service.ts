@@ -5,11 +5,19 @@ import {UiService} from "./ui.service";
 import {ApiService} from "./api.service";
 import {WebSocketSubject} from "rxjs/webSocket";
 import {Subject} from "rxjs";
+import {isBefore} from "date-fns";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessagingService {
+
+  groups: Array<any> = []
+
+  get hasUnread() {
+    const now = new Date()
+    return !!this.groups.find(x => this.isUnread(x))
+  }
 
   private ws: WebSocketSubject<any>
 
@@ -28,6 +36,17 @@ export class MessagingService {
     })
   }
 
+  reload() {
+    this.api.groups().subscribe({
+      next: groups => {
+        this.groups = groups
+      },
+      error: err => {
+        alert(err.statusText)
+      }
+    })
+  }
+
   colorPerson(personId: string) {
     return ColorTranslator.toRGB({ h: Math.abs(hashCode(personId) % 360), s: '50%', l: '50%' })
   }
@@ -42,5 +61,9 @@ export class MessagingService {
 
   sendMessage(groupId: string, text: string) {
     this.ws.next({ groupId, text })
+  }
+
+  isUnread(group: any) {
+    return isBefore(new Date(this.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
   }
 }

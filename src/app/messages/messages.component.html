@@ -4,12 +4,12 @@
 <div class="contacts">
   <div class="contact"
        (click)="select(x)"
-       *ngFor="let x of groups">
+       *ngFor="let x of messaging.groups">
     <div class="photo-holder">
       <div class="photo" [style.background-color]="colorGroup(x)">{{ initial(x) }}</div>
     </div>
     <div class="details">
-      <div class="name">{{ name(x) }} <span *ngIf="isUnread(x)" class="red-dot">•</span></div>
+      <div class="name">{{ name(x) }} <span *ngIf="messaging.isUnread(x)" class="red-dot">•</span></div>
       <div class="last-message">{{ x.latest?.personId === ui.me.id ? 'You: ' : '' }}{{ x.latest?.text }}</div>
     </div>
   </div>

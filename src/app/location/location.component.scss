@@ -36,6 +36,8 @@
       height: 0;
       flex-grow: 1;
       padding: 1rem;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .controls {

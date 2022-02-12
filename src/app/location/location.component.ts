@@ -2,6 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnIn
 import {UiService} from "../ui.service";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {MessagingService} from "../messaging.service";
 
 @Component({
   selector: 'app-location',
@@ -20,7 +21,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private readonly destroyed = new Subject<void>()
 
-  constructor(public ui: UiService, private route: ActivatedRoute, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, public messaging: MessagingService, private route: ActivatedRoute, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -28,6 +29,7 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
     ).subscribe({
       next: () => {
         this.show = 'details'
+        this.content = 'location'
 
         this.cr.detectChanges()
       }

@@ -13,21 +13,10 @@ export class MessagesComponent implements OnInit {
 
   @Output() readonly selected = new EventEmitter<any>()
 
-  groups: Array<any> = []
-
-  constructor(public ui: UiService, private api: ApiService, private messaging: MessagingService, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.api.groups().subscribe({
-      next: groups => {
-        this.groups = groups
-
-        this.cr.detectChanges()
-      },
-      error: err => {
-        alert(err.statusText)
-      }
-    })
+    this.messaging.reload()
   }
 
   select(group: any) {
@@ -40,10 +29,6 @@ export class MessagesComponent implements OnInit {
 
   name(group: any) {
     return this.messaging.getOtherMember(group).person?.name
-  }
-
-  isUnread(group: any) {
-    return isBefore(new Date(this.messaging.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
   }
 
   colorGroup(group: any) {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, delay, of, Subscription, switchMap} from "rxjs";
+import {BehaviorSubject, delay, distinctUntilChanged, of, Subscription, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
 
@@ -43,20 +43,24 @@ export class UiService {
       }
     }
 
-    if (api.token) {
-      this.api.me().subscribe({
-        next: me => {
-          this.me = me
-        },
-        error: err => {
-          if (err.status === 401) {
-            this.unauth()
-          }
+    this.api.authenticated.subscribe(it => {
+      if (!it) {
+        this.unauth(true)
+      } else {
+        this.api.me().subscribe({
+          next: me => {
+            this.me = me
+          },
+          error: err => {
+            if (err.status === 401) {
+              this.unauth()
+            }
 
-          alert(err.statusText)
-        }
-      })
-    }
+            alert(err.statusText)
+          }
+        })
+      }
+    })
   }
 
   saveMe() {
@@ -81,11 +85,13 @@ export class UiService {
     })
   }
 
-  unauth() {
+  unauth(soft = false) {
     this.api.setToken()
     this.me = undefined
 
-    window.location.replace('/')
+    if (!soft) {
+      window.location.replace('/')
+    }
   }
 
   auth(callback?: () => void) {

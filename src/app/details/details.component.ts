@@ -136,6 +136,10 @@ export class DetailsComponent implements OnInit, OnDestroy {
           this.locations = locations
         },
         error: err => {
+          this.loading = false
+
+          this.cr.detectChanges()
+
           alert(err.statusText)
         },
         complete: () => {
@@ -160,7 +164,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
         if (err.status === 404) {
           this.router.navigate(['/'])
         } else {
+          this.loading = false
+
           alert(err.statusText)
+
+          this.cr.detectChanges()
         }
       },
       complete: () => {

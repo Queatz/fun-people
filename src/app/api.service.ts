@@ -1,18 +1,28 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {webSocket, WebSocketSubject} from 'rxjs/webSocket';
+import {BehaviorSubject, distinctUntilChanged} from "rxjs";
+import {environment} from "../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
-  private base = 'http://localhost:8080'
+  private base = environment.apiUrl
 
   token?: string
 
+  get authenticated() {
+    return this._authenticated.pipe(
+      distinctUntilChanged()
+    )
+  }
+
+  private _authenticated = new BehaviorSubject(false)
+
   constructor(private http: HttpClient) {
-    this.token = localStorage.getItem("token") || undefined
+    this.setToken(localStorage.getItem("token") || undefined)
   }
 
   ws(): WebSocketSubject<any> {
@@ -106,6 +116,8 @@ export class ApiService {
     } else {
       localStorage.removeItem('token')
     }
+
+    this._authenticated.next(!!token)
   }
 
   private key(id: string) {

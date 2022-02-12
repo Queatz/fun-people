@@ -4,7 +4,7 @@ import {hashCode} from "./util";
 import {UiService} from "./ui.service";
 import {ApiService} from "./api.service";
 import {WebSocketSubject} from "rxjs/webSocket";
-import {Subject} from "rxjs";
+import {filter, Subject} from "rxjs";
 import {isBefore} from "date-fns";
 
 @Injectable({
@@ -18,7 +18,7 @@ export class MessagingService {
     return !!this.groups.find(x => this.isUnread(x))
   }
 
-  private ws: WebSocketSubject<any>
+  private ws!: WebSocketSubject<any>
 
   readonly messagesObservable = new Subject<any>()
 
@@ -26,12 +26,32 @@ export class MessagingService {
     private api: ApiService,
     private ui: UiService
   ) {
-    this.ws = this.api.ws()
+    const reconnect = () => {
+      this.ws = this.api.ws()
+    }
 
-    this.ws.next({ token: api.token })
+    reconnect()
 
-    this.ws.asObservable().subscribe(data => {
-      this.messagesObservable.next(data)
+    this.api.authenticated.pipe(
+      filter(x => x)
+    ).subscribe(() => {
+      this.ws.next({ token: api.token })
+      this.reload()
+    })
+
+    this.ws.asObservable().subscribe({
+      next: data => {
+        this.messagesObservable.next(data)
+      },
+      error: err => {
+        console.log(err)
+        setTimeout(() => {
+          reconnect()
+        }, 2000)
+      },
+      complete: () => {
+        reconnect()
+      }
     })
   }
 
@@ -51,11 +71,11 @@ export class MessagingService {
   }
 
   getOtherMember(group: any) {
-    return group.members.find((x: any) => x.personId !== this.ui.me.id)
+    return group.members.find((x: any) => x.personId !== this.ui.me?.id)
   }
 
   getMyMember(group: any) {
-    return group.members.find((x: any) => x.personId === this.ui.me.id)
+    return group.members.find((x: any) => x.personId === this.ui.me?.id)
   }
 
   sendMessage(groupId: string, text: string) {

@@ -9,8 +9,9 @@ Incoming
 Bugs
 ====
 
- [ ] BUG  broken websocket when not logged in on page load, can't send messages
- [ ] BUG  red dot should show up right away once authenticated
+ [ ] BUG  401 -> logout except when signing in
+ [ ] BUG  incoming messages should make the red dot visible right away even when not on the messages screen
+ [ ] AQL write-write conflict
 
 Messaging
 =========
@@ -26,10 +27,8 @@ Next
  [ ] FEAT Persist logins across server restart
  [ ] FEAT Temporarily mute posts (vs. removing)
  [ ] FEAT Location edit history (view it)
- [ ] FEAT Settings -> Suggest an improvement
  [ ] FEAT Show number of people in the hangouts
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
- [ ] BUG 401 -> logout
 
 Later
 =====

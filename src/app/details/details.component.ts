@@ -1,7 +1,7 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef, EventEmitter,
+  EventEmitter,
   HostListener,
   OnDestroy,
   OnInit,

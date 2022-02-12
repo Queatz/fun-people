@@ -1,9 +1,9 @@
 import {ChangeDetectorRef, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {UiService} from "../ui.service";
 import {ApiService} from "../api.service";
-import {Subject, takeUntil} from "rxjs";
+import {BehaviorSubject, delay, distinctUntilChanged, of, Subject, Subscription, takeUntil, throttleTime} from "rxjs";
 import {MessagingService} from "../messaging.service";
-import {formatDistanceToNow, formatDistanceToNowStrict} from "date-fns";
+import {formatDistanceToNow} from "date-fns";
 
 @Component({
   selector: 'app-messaging',
@@ -18,7 +18,12 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   sendMessage = ''
 
+  typing = ''
+
+  private typingExpiration?: Subscription
+
   private readonly destroyed = new Subject<void>()
+  private readonly typingDebounce = new BehaviorSubject<boolean>(false)
 
   constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private cr: ChangeDetectorRef) { }
 
@@ -26,9 +31,38 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
     this.messaging.messagesObservable.pipe(
       takeUntil(this.destroyed)
     ).subscribe(message => {
-      if (message.groupId === this.group.id) {
+      if (message.typing !== undefined) {
+        if (message.typing) {
+          this.typing = `${message.name} is typing...`
+        } else {
+          this.typing = ''
+        }
+
+        this.typingExpiration?.unsubscribe()
+
+        this.typingExpiration = of(null).pipe(delay(5000)).subscribe(() => {
+          this.typing = ''
+          this.typingExpiration = undefined
+        })
+      } else if (message.groupId === this.group.id) {
         this.messages.unshift(message)
       }
+    })
+
+    this.typingDebounce.pipe(
+      takeUntil(this.destroyed),
+      throttleTime(4000)
+    ).subscribe(() => {
+      if (this.sendMessage.length > 0) {
+        this.messaging.sendTyping(this.group.id, true)
+      }
+    })
+
+    this.typingDebounce.pipe(
+      takeUntil(this.destroyed),
+      distinctUntilChanged()
+    ).subscribe(() => {
+      this.messaging.sendTyping(this.group.id, this.sendMessage.length > 0)
     })
   }
 
@@ -86,5 +120,9 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   sentAt(message: any) {
     return formatDistanceToNow(new Date(message.createdAt), { addSuffix: true })
+  }
+
+  sendTyping() {
+    this.typingDebounce.next(this.sendMessage.length > 0)
   }
 }

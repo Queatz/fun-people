@@ -112,6 +112,10 @@ export class MessagingService {
     this.ws?.next({ groupId, text })
   }
 
+  sendTyping(groupId: string, typing: boolean) {
+    this.ws?.next({ groupId, typing })
+  }
+
   isUnread(group: any) {
     return isBefore(new Date(this.getMyMember(group)?.readUntil), new Date(group.latest.createdAt))
   }

@@ -14,7 +14,10 @@
       </div>
     </div>
   </div>
+  <div class="typing" *ngIf="typing">
+    {{ typing }}
+  </div>
   <div class="send-message">
-    <input [(ngModel)]="sendMessage" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
+    <input [(ngModel)]="sendMessage" (ngModelChange)="sendTyping()" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
   </div>
 </div>

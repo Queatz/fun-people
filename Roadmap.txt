@@ -3,7 +3,6 @@ Incoming
 ========
 
  [ ] POL  favicon
- [ ] POL  test all dynamic texts with loooooong content
  [ ] Deploy, ssl
 
 Bugs
@@ -12,7 +11,6 @@ Bugs
 =========
 
  [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
- [ ] FEAT  Typing indicator
  [ ] FEAT  Messaging Sounds
  [ ] FEAT  Leave message group
   [ ] Sends message "Person left the chat"
@@ -26,6 +24,7 @@ Next
 Post Launch
 =====
 
+ [ ] FEAT move / delete hangout
  [ ] FEAT Show number of people in the hangouts
  [ ] FEAT Location edit history (view it)
  [ ] FEAT Temporarily mute posts (vs. removing)

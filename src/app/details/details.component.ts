@@ -157,7 +157,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
         this.ui.location = location
       },
       error: err => {
-        alert(err.statusText)
+        if (err.status === 404) {
+          this.router.navigate(['/'])
+        } else {
+          alert(err.statusText)
+        }
       },
       complete: () => {
         this.loading = false

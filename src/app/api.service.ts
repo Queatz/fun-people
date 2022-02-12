@@ -94,6 +94,10 @@ export class ApiService {
     return this.http.post<any>(`${this.base}/location/${this.key(locationId)}`, location)
   }
 
+  sendIdea(idea: any) {
+    return this.http.post<any>(`${this.base}/ideas`, idea)
+  }
+
   setToken(token?: string) {
     this.token = token
 

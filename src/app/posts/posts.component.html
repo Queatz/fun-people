@@ -1,4 +1,4 @@
-<div class="header">
+<div class="header" *ngIf="ui.location">
   <div class="title">People</div>
   <div *ngIf="!posts.length" class="secondary">
     No one's here
@@ -21,5 +21,29 @@
   <div class="link" (click)="createPost()">{{ ui.me ? 'Join' : 'Sign in to join' }} this hangout</div>
 </div>
 <div class="footer" *ngIf="!ui.location">
-  Something random here
+  <div class="title">👋 Welcome to Hangoutville!</div>
+  <p>
+    Did you ever want connect directly with other people in your area in a casual manner?
+  </p>
+  <p>
+    Here's how it works:
+  </p>
+  <ol>
+    <li>Search for your city</li>
+    <li>Discover who's there</li>
+    <li>Shoot them a message</li>
+  </ol>
+  <div class="title">🤔 Who is this for?</div>
+  <p>
+    This platform is perfect for:
+  </p>
+  <ol>
+    <li>Connecting with people in your area</li>
+    <li>Making yourself known to others</li>
+    <li>Staying connected in a low-key way</li>
+  </ol>
+  <div class="title">👏 Have fun!</div>
+  <p>
+    What was that thing that you wanted to do again? Oh right... <i><u>DO IT NOW!</u></i> while you're still alive and well!
+  </p>
 </div>

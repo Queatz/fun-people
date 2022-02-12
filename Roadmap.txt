@@ -1,32 +1,39 @@
 
- [ ] BUG  editing a place doesn't return parent location
- [ ] BUG  Not found -> redirect to home
- [ ] BUG  Clear ALL state when logging out
+Incoming
+========
 
- [ ] FunPeople -> Hangoutville.com
- [ ] favicon
- [ ] test all dynamic texts with loooooong content
+ [ ] POL  favicon
+ [ ] POL  test all dynamic texts with loooooong content
+ [ ] Deploy, ssl
+
+Bugs
+====
+
+ [ ] BUG  broken websocket when not logged in on page load, can't send messages
+ [ ] BUG  red dot should show up right away once authenticated
 
 Messaging
 =========
 
- [ ] FEAT  Email about unread messages (after 1hr)
+ [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT  Typing indicator
- [ ] FEAT  Send message
- [ ] FEAT  Load messages
- [ ] FEAT  Websocket messages
- [ ] FEAT  Colors from Closer
- [ ] FEAT  Sounds
- [ ] FEAT  Leave group message
+ [ ] FEAT  Messaging Sounds
+ [ ] FEAT  Leave message group
 
 Next
 ====
 
- [ ] Persist logins after server restart
- [ ] FEAT Remember my last location in localStorage
- [ ] FEAT Favorite or pin locations
- [ ] FEAT Temporarily mute posts
- [ ] FEAT Location edit history
+ [ ] FEAT Persist logins across server restart
+ [ ] FEAT Temporarily mute posts (vs. removing)
+ [ ] FEAT Location edit history (view it)
  [ ] FEAT Settings -> Suggest an improvement
  [ ] FEAT Show number of people in the hangouts
- [ ] Permissions -> Who can manage this hangout? Just me, Everyone
+ [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
+ [ ] BUG 401 -> logout
+
+Later
+=====
+
+ [ ] FEAT Manage who can be in the various locations that I own
+ [ ] Dark mode
+ [ ] FEAT Favorite or pin locations

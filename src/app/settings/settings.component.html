@@ -18,6 +18,12 @@
     </div>
 
     <app-location-list [locations]="locations" empty="None" (selected)="open($event)"></app-location-list>
+
+    <hr />
+    <p>
+      Have an idea or any other feedback for Hangoutville?
+    </p>
+    <a (click)="sendIdea()">Share it!</a>
   </div>
   <div *ngIf="!ui.me">
     <div class="title">

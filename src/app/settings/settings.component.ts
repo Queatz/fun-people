@@ -41,4 +41,21 @@ export class SettingsComponent implements OnInit, OnDestroy {
   open(location?: any) {
     this.ui.openLocation(location)
   }
+
+  sendIdea() {
+    const idea = prompt('Share an idea to improve Hangoutville')
+
+    if (!idea) {
+      return
+    }
+
+    this.api.sendIdea({ idea }).subscribe({
+      next: () => {
+        alert('Thank you for the input!')
+      },
+      error: err => {
+        alert(err.statusText)
+      }
+    })
+  }
 }

@@ -16,6 +16,12 @@ export class UiService {
 
   set location(value: any) {
     this._location = value
+
+    if (value?.url) {
+      localStorage.setItem('location', value?.url)
+    } else {
+      localStorage.removeItem('location')
+    }
     this.changes.next(null)
   }
 
@@ -29,6 +35,14 @@ export class UiService {
   readonly changes = new BehaviorSubject(null)
 
   constructor(private router: Router, private api: ApiService) {
+    if (router.url === '/') {
+      const l = localStorage.getItem('location')
+
+      if (l) {
+        this.router.navigate(['/', l])
+      }
+    }
+
     if (api.token) {
       this.api.me().subscribe({
         next: me => {
@@ -71,7 +85,7 @@ export class UiService {
     this.api.setToken()
     this.me = undefined
 
-    this.router.navigate(['/'])
+    window.location.replace('/')
   }
 
   auth(callback?: () => void) {

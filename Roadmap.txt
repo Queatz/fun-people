@@ -10,9 +10,6 @@ Bugs
 =========
 
  [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
- [ ] FEAT  Messaging Sounds
- [ ] FEAT  Leave message group
-  [ ] Sends message "Person left the chat"
 
 Next
 ====

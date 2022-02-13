@@ -52,7 +52,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   private typingExpiration?: Subscription
   private readonly destroyed = new Subject<void>()
-  private readonly typingDebounce = new BehaviorSubject<boolean>(false)
+  private readonly typingDebounce = new Subject<boolean>()
 
   constructor(public ui: UiService, private api: ApiService, public messaging: MessagingService, private router: Router, private cr: ChangeDetectorRef) {
   }

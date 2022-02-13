@@ -22,12 +22,16 @@ export class MessagingService {
 
   private observations = new Map<string, number>()
 
+  private audio = new Audio('/assets/message.mp3')
+
   readonly messagesObservable = new Subject<any>()
 
   constructor(
     private api: ApiService,
     private ui: UiService
   ) {
+    this.audio.load()
+
     const reconnect = () => {
       this.ws = this.api.ws()
 
@@ -46,6 +50,10 @@ export class MessagingService {
                   member.readUntil = message.createdAt
                 }
               }
+            }
+
+            if (message.personId !== this.ui.me?.id) {
+              this.audio.play()
             }
           }
 

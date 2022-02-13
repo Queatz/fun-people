@@ -77,8 +77,6 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   createPost() {
     if (!this.ui.me) {
-      alert('Sign in to join hangouts')
-
       this.ui.auth(() => {
         this.createPost()
       })

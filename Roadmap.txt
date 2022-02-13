@@ -2,7 +2,6 @@
 Incoming
 ========
 
- [ ] INFR Deploy, ssl
 
 Bugs
 ====
@@ -14,7 +13,6 @@ Bugs
 Next
 ====
 
- [ ] FEAT Persist logins across server restart
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 
 Post Launch

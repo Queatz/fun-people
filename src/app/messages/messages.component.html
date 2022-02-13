@@ -2,6 +2,9 @@
   Messages
 </div>
 <div class="contacts">
+  <div class="secondary" *ngIf="!messaging.groups.length">
+    None
+  </div>
   <div class="contact"
        (click)="select(x)"
        *ngFor="let x of messaging.groups">

@@ -36,7 +36,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
 
   menuItems = () => [
     { name: 'Edit description', callback: () => this.editDescription() },
-    { name: 'Manage permissions', callback: () => this.addLocation() },
+    //{ name: 'Manage permissions', callback: () => this.addLocation() },
     { name: 'Add a hangout', callback: () => this.addLocation() }
   ]
 

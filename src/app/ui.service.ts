@@ -12,6 +12,8 @@ export class UiService {
   private _me?: any
   private updateMeSubscription?: Subscription
 
+  private signinEmail = ''
+
   get location() { return this._location }
 
   set location(value: any) {
@@ -88,6 +90,7 @@ export class UiService {
   unauth(soft = false) {
     this.api.setToken()
     this.me = undefined
+    this.signinEmail = ''
 
     if (!soft) {
       window.location.replace('/')
@@ -95,11 +98,18 @@ export class UiService {
   }
 
   auth(callback?: () => void) {
-    const email = prompt('Email')
+    const email = prompt('Email', this.signinEmail)?.trim()
 
-    if (!email?.trim()) {
+    if (!email) {
       return
     }
+
+    if (this.signinEmail === email) {
+      this.enterCode(email, callback)
+      return
+    }
+
+    this.signinEmail = email
 
     this.api.signin(email).subscribe({
       next: () => {
@@ -112,9 +122,9 @@ export class UiService {
   }
 
   private enterCode(email: string, callback?: () => void) {
-    const code = prompt('Enter code from the email')
+    const code = prompt('Enter code from the email')?.trim()
 
-    if (!code?.trim()) {
+    if (!code) {
       return
     }
 

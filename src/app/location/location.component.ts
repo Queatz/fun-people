@@ -1,4 +1,13 @@
-import {AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  HostListener,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {UiService} from "../ui.service";
 import {filter, Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
@@ -56,6 +65,14 @@ export class LocationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     this.navEl.nativeElement.scrollY = 0
+  }
+
+  @HostListener('window:keyup.escape')
+  up() {
+    if (this.show !== 'details') {
+      this.show = 'details'
+      this.content = 'location'
+    }
   }
 
   showMessages(group: any) {

@@ -2,7 +2,7 @@
   <div class="messaging">
     <div class="message" [ngClass]="{ 'reverse': x.personId === ui.me.id }" *ngFor="let x of messages; let i = index">
       <div class="photo-holder" *ngIf="x.personId !== ui.me.id">
-        <div class="photo" (click)="showPerson(x.person)" [title]="x.person.name" [style.background-color]="colorPerson(x.person.id)" *ngIf="showPhoto(i)">{{ x.person.name[0] }}</div>
+        <div class="photo" (click)="showPerson(x.person)" [title]="x.person.name" [style.background-color]="colorPerson(x.person.id)" *ngIf="showPhoto(i)">{{ messaging.personName(x.person)[0] }}</div>
       </div>
       <div class="content">
         <div class="body" [title]="sentAt(x)">

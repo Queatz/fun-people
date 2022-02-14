@@ -143,6 +143,15 @@ export class UiService {
       next: result => {
         this.api.setToken(result.token)
         this.me = result.person
+
+        if (!this.me?.name) {
+          const name = prompt('Enter your name')
+
+          if (name?.trim()) {
+            this.setName(name)
+          }
+        }
+
         callback?.()
       },
       error: err => {
@@ -169,5 +178,10 @@ export class UiService {
         }
       })
     }
+  }
+
+  private setName(name: string) {
+    this.me.name = name.trim()
+    this.saveMe()
   }
 }

@@ -143,6 +143,8 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
     this.messaging.sendMessage(this.group.id, this.sendMessage)
 
     this.sendMessage = ''
+
+    this.sendTyping()
   }
 
   showPhoto(index: number) {

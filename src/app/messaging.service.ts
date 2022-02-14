@@ -61,31 +61,34 @@ export class MessagingService {
         },
         error: err => {
           console.log(err)
+
+          this.ws = undefined
+
           setTimeout(() => {
             if (this.api.token) {
               reconnect()
-            } else {
-              this.ws = undefined
             }
           }, 2000)
         },
         complete: () => {
+          this.ws = undefined
+
           if (this.api.token) {
             reconnect()
-          } else {
-            this.ws = undefined
           }
         }
       })
+
+      this.auth()
     }
 
     this.api.authenticated.subscribe(authenticated => {
       if (authenticated) {
         if (this.ws?.closed !== false) {
           reconnect()
+        } else {
+          this.auth()
         }
-
-        this.ws!.next({token: api.token})
 
         this.reload()
       } else {
@@ -164,5 +167,9 @@ export class MessagingService {
         member.readUntil = group.latest.createdAt
       }
     }
+  }
+
+  private auth() {
+    this.ws!.next({token: this.api.token})
   }
 }

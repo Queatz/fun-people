@@ -15,8 +15,6 @@ Next
 ====
 
  [ ] H: if disconnected when sending message then try reconnecting and sending else need error msg
- [ ] H: press ok to leave this chat
- [ ] H: After creating account need to enter your name
 
  [ ] FEAT Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
@@ -43,4 +41,6 @@ Post Launch
  [ ] H: secret locations that people make available to specific ppl
  [ ] H: think about items that give you access to secret time
 
-, report spam
+ [ ] Redo WS messaging
+
+ [ ] , report spam

@@ -19,7 +19,9 @@
   </div>
   <div class="send-message">
     <input [(ngModel)]="sendMessage" (ngModelChange)="sendTyping()" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
-    <div class="i" #menuTrigger [ngClass]="{ 'lg': !!sendMessage }" (click)="sendClicked(menu, menuTrigger)">{{ sendMessage ? '➤' : '⋮' }}</div>
+    <div class="i" #menuTrigger (click)="sendClicked(menu, menuTrigger)">
+      <span class="material-icons">{{ sendMessage ? 'send' : 'more_vert' }}</span>
+    </div>
     <app-menu #menu [items]="menuOptions"></app-menu>
   </div>
 </div>

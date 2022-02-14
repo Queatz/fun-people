@@ -80,7 +80,7 @@ export class UiService {
     this.updateMeSubscription?.unsubscribe()
 
     this.updateMeSubscription = of(null).pipe(
-      delay(1000),
+      delay(5000),
       switchMap(() => this.api.updateMe({
         name: this.me.name,
         introduction: this.me.introduction,

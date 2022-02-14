@@ -65,16 +65,16 @@ export class PostComponent implements OnInit, OnDestroy {
     alert(`${person.name}\n\n${person?.introduction}`)
   }
 
-  replyToPost(input: HTMLInputElement) {
+  replyToPost() {
     if (!this.ui.me) {
       this.ui.auth(() => {
-        this.replyToPost(input)
+        this.replyToPost()
       })
       return
     }
 
-    const text = input.value
-    input.value = ''
+    const text = this.replyMessage
+    this.replyMessage = ''
 
     if (!text.trim()) {
       return
@@ -88,7 +88,7 @@ export class PostComponent implements OnInit, OnDestroy {
       },
       error: err => {
         alert(err.statusText)
-        input.value = text
+        this.replyMessage = text
       }
     })
   }

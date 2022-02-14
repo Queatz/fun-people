@@ -6,9 +6,9 @@
       <app-settings *ngSwitchCase="'settings'"></app-settings>
     </div>
     <div class="controls">
-      <div class="i" (click)="content = 'location'; show = 'details'">🌏</div>
-      <div class="i" *ngIf="ui.me" (click)="show = 'messages'">{{messaging.hasUnread ? '📬' : '📪'}}<span *ngIf="messaging.hasUnread" class="red-dot">•</span></div>
-      <div class="i" (click)="show = 'settings'">🤠</div>
+      <div class="i" [ngClass]="{ 'i-active': show === 'details' }" (click)="content = 'location'; show = 'details'">🌏</div>
+      <div class="i" [ngClass]="{ 'i-active': show === 'messages' }" *ngIf="ui.me" (click)="show = 'messages'">{{messaging.hasUnread ? '📬' : '📪'}}<span *ngIf="messaging.hasUnread" class="red-dot">•</span></div>
+      <div class="i" [ngClass]="{ 'i-active': show === 'settings' }" (click)="show = 'settings'">🤠</div>
     </div>
   </div>
   <div class="content" [ngSwitch]="content">

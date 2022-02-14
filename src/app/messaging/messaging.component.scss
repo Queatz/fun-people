@@ -56,11 +56,11 @@
   margin-top: .5rem;
   word-break: break-word;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 640px) {
     max-width: 50%;
   }
 
-  @media screen and (max-width: 960px) {
+  @media screen and (max-width: 640px) {
     max-width: calc(100% - 4rem);
   }
 
@@ -70,6 +70,10 @@
 
     .content {
       align-items: end;
+
+      .body {
+        background: #f0f0f0;
+      }
     }
 
     .photo-holder {

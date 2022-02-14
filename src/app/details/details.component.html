@@ -10,8 +10,8 @@
     <div class="i" *ngIf="ui.location && ui.me" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
     <app-menu #menu [items]="menuItems"></app-menu>
   </div>
-  <div class="description" [style.text-align]="ui.location?.description?.length > 128 ? 'justify' : 'inherit'">
-    {{ ui.location ? ui.location?.description : '' }}
+  <div class="description" *ngIf="ui.location?.description" [style.text-align]="ui.location?.description?.length > 128 ? 'justify' : 'inherit'">
+    {{ ui.location?.description }}
   </div>
   <div class="search" *ngIf="!ui.location">
     <input [(ngModel)]="searchQuery" (ngModelChange)="search()" placeholder="Search for your city" />

@@ -14,7 +14,6 @@ Bugs
 Next
 ====
 
- [ ] H: back button
  [ ] H: if disconnected when sending message then try reconnecting and sending else need error msg
  [ ] H: press ok to leave this chat
  [ ] H: After creating account need to enter your name

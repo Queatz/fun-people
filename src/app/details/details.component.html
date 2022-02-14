@@ -1,13 +1,14 @@
 <div *ngIf="!loading" class="wrapper">
   <div class="header">
+    <div class="i i-up" *ngIf="ui.location" (click)="open(ui.location?.path?.[0])">←</div>
     <div class="title">
       {{ ui.location?.name || '🌏 Earth' }}
+      <div class="in" (click)="open(ui.location?.path?.[0])">
+        {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 Earth' : '🌠 Outer space' }}
+      </div>
     </div>
     <div class="i" *ngIf="ui.location && ui.me" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
     <app-menu #menu [items]="menuItems"></app-menu>
-  </div>
-  <div class="in" (click)="open(ui.location?.path?.[0])">
-    {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 Earth' : '🌠 Outer space' }}
   </div>
   <div class="description" [style.text-align]="ui.location?.description?.length > 128 ? 'justify' : 'inherit'">
     {{ ui.location ? ui.location?.description : '' }}

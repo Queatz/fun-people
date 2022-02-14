@@ -44,45 +44,6 @@ export class PostsComponent implements OnInit, OnDestroy {
     this.destroyed.complete()
   }
 
-  menuItems(post: any) {
-    return () => [
-      {
-        name: 'Edit message', callback: () => {
-          const text = prompt('Post', post.text || '')
-
-          if (!text?.trim()) {
-            return
-          }
-
-          this.api.editPost(post.id, {text}).subscribe({
-            next: () => {
-              this.ui.changes.next(null)
-            },
-            error: err => {
-              alert(err.statusText)
-            }
-          })
-        }
-      },
-      {
-        name: 'Leave hangout', callback: () => {
-          this.api.removePost(post.id).subscribe({
-            next: () => {
-              this.ui.changes.next(null)
-            },
-            error: err => {
-              alert(err.statusText)
-            }
-          })
-        }
-      }
-    ]
-  }
-
-  showPerson(person: any) {
-    alert(`${person.name}\n\n${person?.introduction}`)
-  }
-
   createPost() {
     if (!this.ui.me) {
       this.ui.auth(() => {
@@ -113,34 +74,6 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   imHere() {
     return this.posts.some(x => x.personId === this.ui.me?.id)
-  }
-
-  replyToPost(post: any, input: HTMLInputElement) {
-    if (!this.ui.me) {
-      this.ui.auth(() => {
-        this.replyToPost(post, input)
-      })
-      return
-    }
-
-    const text = input.value
-    input.value = ''
-
-    if (!text.trim()) {
-      return
-    }
-
-    this.api.replyToPost(post.id, text).pipe(
-      takeUntil(this.destroyed)
-    ).subscribe({
-      next: () => {
-        alert('Your message has been sent')
-      },
-      error: err => {
-        alert(err.statusText)
-        input.value = text
-      }
-    })
   }
 
   signin() {

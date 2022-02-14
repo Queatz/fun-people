@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-title">
+    <div class="card-title-text" (click)="showPerson(post.person)">{{ post.person?.name || 'Monkey' }}</div>
+    <div class="i" *ngIf="ui.me?.id === post.person?.id" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
+    <app-menu #menu [items]="menuItems(post)"></app-menu>
+  </div>
+  <div class="card-text">{{ post.text }}</div>
+  <div class="input-wrapper" *ngIf="ui.me?.id !== post.person?.id">
+    <input
+      #reply
+      [(ngModel)]="replyMessage"
+      (click)="signin()"
+      (keydown.enter)="replyToPost(reply)"
+      [placeholder]="(ui.me ? 'Reply to ' : 'Sign in to reply to ') + (post.person?.name || 'Monkey')" />
+    <div class="i" (click)="replyToPost(reply)" *ngIf="!!replyMessage">➤</div>
+  </div>
+</div>

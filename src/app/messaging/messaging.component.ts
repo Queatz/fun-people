@@ -38,7 +38,14 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
         return
       }
 
-      this.api.leaveGroup(this.group.id).pipe(
+
+      const reason = prompt('Tell us about a problem, or choose OK to leave')
+
+      if (reason === null) {
+        return
+      }
+
+      this.api.leaveGroup(this.group.id, { reason }).pipe(
         takeUntil(this.destroyed)
       ).subscribe({
         next: () => {

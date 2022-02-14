@@ -6,12 +6,20 @@
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 
   .title {
     width: 0;
     word-break: break-word;
   }
+}
+
+.i-up {
+  margin-right: .5rem;
+}
+
+.inset {
+  margin-left: 1rem;
 }
 
 .description {
@@ -32,6 +40,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  font-weight: normal;
 
   &:hover {
     text-decoration: underline;

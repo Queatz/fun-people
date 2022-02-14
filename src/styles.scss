@@ -38,6 +38,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
   cursor: pointer;
   width: 2rem;
   height: 2rem;

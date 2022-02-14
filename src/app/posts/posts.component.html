@@ -13,14 +13,14 @@
   <div class="card-text">{{ x.text }}</div>
   <input *ngIf="ui.me?.id !== x.person?.id"
          #reply
+         (click)="signin()"
          (keydown.enter)="replyToPost(x, reply)"
-         [placeholder]="(ui.me ? 'Reply to ' : 'Sign in to reply to ') + (x.person?.name || 'Monkey')"
-         [disabled]="!ui.me" />
+         [placeholder]="(ui.me ? 'Reply to ' : 'Sign in to reply to ') + (x.person?.name || 'Monkey')" />
 </div>
-<div class="footer" *ngIf="ui.location && !imHere()">
+<div class="footer" *ngIf="ui.location && !imHere() && !loading">
   <div class="link" (click)="createPost()">{{ ui.me ? 'Join' : 'Sign in to join' }} this hangout</div>
 </div>
-<div class="footer" *ngIf="!ui.location">
+<div class="footer" *ngIf="!ui.location && !ui.loadingLocation">
   <div class="title">👋 Welcome to Hangoutville!</div>
   <p>
     Did you ever want connect directly with other people in your area in a casual manner?

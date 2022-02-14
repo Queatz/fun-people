@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, delay, distinctUntilChanged, of, Subscription, switchMap} from "rxjs";
+import {BehaviorSubject, delay, of, Subscription, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {ApiService} from "./api.service";
+import {Title} from "@angular/platform-browser";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UiService {
+
+  loadingLocation = true
 
   private _location?: any
   private _me?: any
@@ -18,12 +21,20 @@ export class UiService {
 
   set location(value: any) {
     this._location = value
+    this.loadingLocation = false
 
     if (value?.url) {
       localStorage.setItem('location', value?.url)
     } else {
       localStorage.removeItem('location')
     }
+
+    if (value?.name) {
+      this.title.setTitle(`${value.name} • Hangoutville`)
+    } else {
+      this.title.setTitle('Hangoutville')
+    }
+
     this.changes.next(null)
   }
 
@@ -36,7 +47,7 @@ export class UiService {
 
   readonly changes = new BehaviorSubject(null)
 
-  constructor(private router: Router, private api: ApiService) {
+  constructor(private router: Router, private api: ApiService, private title: Title) {
     if (router.url === '/') {
       const l = localStorage.getItem('location')
 
@@ -98,7 +109,7 @@ export class UiService {
   }
 
   auth(callback?: () => void) {
-    const email = prompt('Email', this.signinEmail)?.trim()
+    const email = prompt('Sign in with email', this.signinEmail)?.trim()
 
     if (!email) {
       return

@@ -10,6 +10,7 @@ import {ApiService} from "../api.service";
 })
 export class PostsComponent implements OnInit, OnDestroy {
 
+  loading = true
   posts: Array<any> = []
 
   private readonly destroyed = new Subject<void>()
@@ -19,15 +20,22 @@ export class PostsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.ui.changes.pipe(
       tap(() => {
+        this.loading = true
         this.posts = []
 
         this.cr.detectChanges()
       }),
       takeUntil(this.destroyed),
       switchMap(() => this.ui.location ? this.api.posts(this.ui.location.id) : of([]))
-    ).subscribe(it => {
-      this.posts = it
-      this.cr.detectChanges()
+    ).subscribe({
+      next: it => {
+        this.loading = false
+        this.posts = it
+        this.cr.detectChanges()
+      },
+      error: err => {
+        alert(err.statusText)
+      }
     })
   }
 
@@ -108,6 +116,13 @@ export class PostsComponent implements OnInit, OnDestroy {
   }
 
   replyToPost(post: any, input: HTMLInputElement) {
+    if (!this.ui.me) {
+      this.ui.auth(() => {
+        this.replyToPost(post, input)
+      })
+      return
+    }
+
     const text = input.value
     input.value = ''
 
@@ -126,5 +141,13 @@ export class PostsComponent implements OnInit, OnDestroy {
         input.value = text
       }
     })
+  }
+
+  signin() {
+    if (this.ui.me) {
+      return
+    }
+
+    this.ui.auth()
   }
 }

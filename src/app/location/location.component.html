@@ -7,7 +7,7 @@
     </div>
     <div class="controls">
       <div class="i" (click)="content = 'location'; show = 'details'">🌏</div>
-      <div class="i" *ngIf="ui.me" (click)="show = 'messages'">📬<span *ngIf="messaging.hasUnread" class="red-dot">•</span></div>
+      <div class="i" *ngIf="ui.me" (click)="show = 'messages'">{{messaging.hasUnread ? '📬' : '📪'}}<span *ngIf="messaging.hasUnread" class="red-dot">•</span></div>
       <div class="i" (click)="show = 'settings'">🤠</div>
     </div>
   </div>

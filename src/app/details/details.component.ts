@@ -198,8 +198,9 @@ export class DetailsComponent implements OnInit, OnDestroy {
       locationId: this.ui.location.id,
       name
     }).subscribe({
-      next: () => {
+      next: location => {
         this.ui.changes.next(null)
+        this.router.navigate(['/', location.url])
       },
       error: err => {
         alert(err.statusText)

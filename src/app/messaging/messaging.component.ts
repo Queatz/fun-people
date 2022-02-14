@@ -64,7 +64,7 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
     ).subscribe(message => {
       if (message.typing !== undefined) {
         if (message.typing) {
-          this.typing = `${message.name} is typing...`
+          this.typing = `${message.name || 'Monkey'} is typing...`
         } else {
           this.typing = ''
         }

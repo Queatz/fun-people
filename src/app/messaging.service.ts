@@ -135,7 +135,11 @@ export class MessagingService {
   }
 
   name(group: any) {
-    return this.getOtherMember(group)?.person?.name || 'Nobody'
+    return this.personName(this.getOtherMember(group)?.person)
+  }
+
+  personName(person: any) {
+    return !person ? 'Nobody' : person.name || 'Monkey'
   }
 
   observing(groupId: string, isObserving: boolean) {

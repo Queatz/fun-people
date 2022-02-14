@@ -2,21 +2,27 @@
 Incoming
 ========
 
+ [ ]
 
 Bugs
 ====
 
-=========
-
- [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
-
 Next
 ====
 
+ [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 
 Post Launch
 =====
+
+ [ ] Group chat in every location available
+ [ ] Create a private group chat (UX flow?)
+ [ ] Group creator should be able to rename
+
+ [ ] Move a hangout
+
+ [ ] Established people can vote for people to manage their area
 
  [ ] FEAT move / delete hangout
  [ ] FEAT Show number of people in the hangouts
@@ -25,4 +31,6 @@ Post Launch
  [ ] FEAT Manage who can be in the various locations that I own
  [ ] FEAT Dark mode
  [ ] FEAT Favorite or pin locations
- [ ] Report spam
+ [ ] FEAT Report spam
+
+ [ ] Calendar features

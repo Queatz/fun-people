@@ -3,28 +3,33 @@ Incoming
 ========
 
  [ ]
+ [ ] H: top area redesign mobile
 
 Bugs
 ====
 
+ [ ] H: http redirect
+ [ ] H: send below bottom of screen on FF mobile
+
 Next
 ====
 
- [ ] FEAT  Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
+ [ ] H: back button
+ [ ] H: if disconnected when sending message then try reconnecting and sending else need error msg
+ [ ] H: press ok to leave this chat
+ [ ] H: After creating account need to enter your name
+
+ [ ] FEAT Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 
 Post Launch
 =====
 
- [ ] Group chat in every location available
- [ ] Create a private group chat (UX flow?)
- [ ] Group creator should be able to rename
+ [ ] FEAT Group chat in every location available
+ [ ] FEAT Create a private group chat (UX flow?)
+ [ ] FEAT Group creator should be able to rename
 
- [ ] Move a hangout
-
- [ ] Established people can vote for people to manage their area
-
- [ ] FEAT move / delete hangout
+ [ ] FEAT Move / delete hangout
  [ ] FEAT Show number of people in the hangouts
  [ ] FEAT Location edit history (view it)
  [ ] FEAT Temporarily mute posts (vs. removing)
@@ -33,4 +38,10 @@ Post Launch
  [ ] FEAT Favorite or pin locations
  [ ] FEAT Report spam
 
- [ ] Calendar features
+ [ ] DISC Established people can vote for people to manage their area
+ [ ] DISC Calendar features
+
+ [ ] H: secret locations that people make available to specific ppl
+ [ ] H: think about items that give you access to secret time
+
+, report spam

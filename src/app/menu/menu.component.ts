@@ -70,14 +70,8 @@ export class MenuComponent implements OnInit {
       return
     }
 
-    const isInMenu = this.menuEl?.nativeElement?.contains((event.target as HTMLElement))
-
-    if (!isInMenu) {
-        this.show = false
-    } else {
-      setTimeout(() => {
-        this.show = false
-      })
-    }
+    setTimeout(() => {
+      this.show = false
+    })
   }
 }

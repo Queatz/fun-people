@@ -15,6 +15,7 @@ import {
 import {MessagingService} from "../messaging.service";
 import {formatDistanceToNow} from "date-fns";
 import {Router} from "@angular/router";
+import {MenuComponent} from "../menu/menu.component";
 
 @Component({
   selector: 'app-messaging',
@@ -155,5 +156,13 @@ export class MessagingComponent implements OnInit, OnChanges, OnDestroy {
 
   sendTyping() {
     this.typingDebounce.next(this.sendMessage.length > 0)
+  }
+
+  sendClicked(menu: MenuComponent, menuTrigger: HTMLDivElement) {
+    if (this.sendMessage) {
+      this.send()
+    } else {
+      menu.open(menuTrigger)
+    }
   }
 }

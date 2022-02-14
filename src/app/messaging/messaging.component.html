@@ -19,7 +19,7 @@
   </div>
   <div class="send-message">
     <input [(ngModel)]="sendMessage" (ngModelChange)="sendTyping()" (keydown.enter)="send()" [placeholder]="'Reply to ' + messaging.name(group)" />
-    <div class="i" #menuTrigger (click)="menu.open(menuTrigger)">⋮</div>
+    <div class="i" #menuTrigger [ngClass]="{ 'lg': !!sendMessage }" (click)="sendClicked(menu, menuTrigger)">{{ sendMessage ? '➤' : '⋮' }}</div>
     <app-menu #menu [items]="menuOptions"></app-menu>
   </div>
 </div>

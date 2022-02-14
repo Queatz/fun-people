@@ -6,6 +6,7 @@
   justify-content: start;
   align-items: start;
   align-content: start;
+  overflow: auto;
 
   flex-wrap: wrap;
 
@@ -52,10 +53,6 @@
 
   .card-text {
   }
-
-  input {
-    margin-top: 1rem;
-  }
 }
 
 .footer {
@@ -71,4 +68,20 @@
 .header {
   width: 100%;
   padding: .5rem;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+
+  .i {
+    margin-left: .5rem;
+    font-size: 20px;
+  }
+
+  input {
+    width: 0;
+    flex-grow: 1;
+  }
 }

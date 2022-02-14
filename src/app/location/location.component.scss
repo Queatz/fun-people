@@ -1,6 +1,12 @@
 .root {
   display: flex;
-  height: 100%;
+
+  // Have to do this for Firefox mobile app
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
   @media screen and (max-width: 640px) {
     flex-direction: column;
@@ -33,6 +39,7 @@
         align-content: center;
         align-items: center;
         box-sizing: border-box;
+        z-index: 10;
       }
     }
   }

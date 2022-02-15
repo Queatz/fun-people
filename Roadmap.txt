@@ -7,7 +7,6 @@ Incoming
 Bugs
 ====
 
- [ ] H: http redirect
  [ ] H: send below bottom of screen on FF mobile
  [ ] Clip all text to 1024 chars (posts, chats, name, description, about, location name, )
 

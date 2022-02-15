@@ -31,6 +31,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.png",
+              "src/favicon-notification.png",
               "src/assets"
             ],
             "styles": [
@@ -99,6 +100,7 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.png",
+              "src/favicon-notification.png",
               "src/assets"
             ],
             "styles": [

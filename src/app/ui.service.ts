@@ -76,6 +76,12 @@ export class UiService {
     })
   }
 
+  setHasNotification(has: boolean) {
+    const favicon = document.querySelector<HTMLLinkElement>("#favicon")
+    console.log(favicon)
+    favicon!.href = has ? 'favicon-notification.png' : 'favicon.png'
+  }
+
   saveMe() {
     this.updateMeSubscription?.unsubscribe()
 
@@ -162,7 +168,11 @@ export class UiService {
 
   openLocation(location: any) {
     if (!location) {
-      this.router.navigate(['/'])
+      if ( !this.location) {
+        alert('Hold up! There\'s still thins to do here.')
+      } else {
+        this.router.navigate(['/'])
+      }
       return
     }
 

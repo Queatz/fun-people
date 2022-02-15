@@ -58,6 +58,8 @@ export class MessagingService {
           }
 
           this.messagesObservable.next(message)
+
+          this.refresh()
         },
         error: err => {
           console.log(err)
@@ -102,6 +104,8 @@ export class MessagingService {
     this.api.groups().subscribe({
       next: groups => {
         this.groups = groups
+
+        this.refresh()
       },
       error: err => {
         alert(err.statusText)
@@ -167,6 +171,12 @@ export class MessagingService {
         member.readUntil = group.latest.createdAt
       }
     }
+
+    this.refresh()
+  }
+
+  private refresh() {
+    this.ui.setHasNotification(this.hasUnread)
   }
 
   private auth() {

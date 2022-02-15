@@ -83,4 +83,8 @@ export class PostsComponent implements OnInit, OnDestroy {
 
     this.ui.auth()
   }
+
+  doItNow() {
+    alert('Seriously, do it!')
+  }
 }

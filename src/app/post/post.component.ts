@@ -2,6 +2,7 @@ import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/c
 import {UiService} from "../ui.service";
 import {ApiService} from "../api.service";
 import {Subject, takeUntil} from "rxjs";
+import {MessagingService} from "../messaging.service";
 
 @Component({
   selector: 'app-post',
@@ -16,7 +17,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
   private readonly destroyed = new Subject<void>()
 
-  constructor(public ui: UiService, private api: ApiService, private cr: ChangeDetectorRef) { }
+  constructor(public ui: UiService, public messaging: MessagingService, private api: ApiService, private cr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }

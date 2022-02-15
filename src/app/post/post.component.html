@@ -1,6 +1,12 @@
 <div class="card">
   <div class="card-title">
-    <div class="card-title-text" (click)="showPerson(post.person)">{{ post.person?.name || 'Monkey' }}</div>
+    <div class="photo-holder" (click)="showPerson(post.person)">
+      <div class="photo" [style.background-color]="messaging.colorPerson(post.personId)">{{ messaging.personName(post.person)?.[0] }}</div>
+    </div>
+    <div class="card-title-text" (click)="showPerson(post.person)">
+      <div class="text-main">{{ post.person?.name || 'Monkey' }}</div>
+      <div class="text-secondary">{{ post.person?.introduction?.split('\n')?.[0]}}</div>
+    </div>
     <div class="i" *ngIf="ui.me?.id === post.person?.id" #menuTrigger (click)="menu.open(menuTrigger)">
       <span class="material-icons">more_vert</span>
     </div>

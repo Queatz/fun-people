@@ -3,17 +3,18 @@ Incoming
 ========
 
  [ ]
- [ ] H: top area redesign mobile
 
 Bugs
 ====
 
  [ ] H: http redirect
  [ ] H: send below bottom of screen on FF mobile
+ [ ] Clip all text to 1024 chars (posts, chats, name, description, about, location name, )
 
 Next
 ====
 
+ [ ] change favicon when new message
  [ ] FEAT Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 

@@ -8,6 +8,32 @@ npm install -g angular-http-server
 
 ```
 
+## HTTP -> HTTPS
+
+1. Install Nginx
+
+```shell
+apt install nginx
+```
+
+2. Replace the contents of `/etc/nginx/sites-enabled/default ` with following
+
+```
+server {
+    listen 80 default_server;
+
+    server_name _;
+
+    return 301 https://$host$request_uri;
+}
+```
+
+3. Finally, restart Nginx
+
+```shell
+service restart nginx
+```
+
 Run
 ===
 

@@ -124,8 +124,8 @@ export class DetailsComponent implements OnInit, OnDestroy {
     })
   }
 
-  open(location?: any) {
-    this.ui.openLocation(location)
+  open(location?: any, toOuterSpace = false) {
+    this.ui.openLocation(location, toOuterSpace)
   }
 
   setLocationUrl(url?: string) {

@@ -166,10 +166,10 @@ export class UiService {
     })
   }
 
-  openLocation(location: any) {
+  openLocation(location: any, toOuterSpace = false) {
     if (!location) {
-      if ( !this.location) {
-        alert('Hold up! There\'s still thins to do here.')
+      if (!this.location && toOuterSpace) {
+        alert('Hold up! There\'s still things to do here.')
       } else {
         this.router.navigate(['/'])
       }

@@ -5,7 +5,7 @@
     </div>
     <div class="title">
       {{ ui.location?.name || '🌏 Earth' }}
-      <div class="in" (click)="open(ui.location?.path?.[0])">
+      <div class="in" (click)="open(ui.location?.path?.[0], true)">
         {{ ui.location ? ui.location?.path?.[0]?.name || '🌏 Earth' : '🌠 Outer space' }}
       </div>
     </div>

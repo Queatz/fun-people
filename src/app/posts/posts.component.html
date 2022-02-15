@@ -8,27 +8,36 @@
 <div class="footer" *ngIf="ui.location && !imHere() && !loading">
   <div class="link" (click)="createPost()">{{ ui.me ? 'Join' : 'Sign in to join' }} this hangout</div>
 </div>
-<div class="footer" *ngIf="!ui.location && !ui.loadingLocation">
-  <div class="title">👋 Welcome to Hangoutville!</div>
+<div class="footer text-lg" *ngIf="!ui.location && !ui.loadingLocation">
+  <div class="title">👋 Welcome!</div>
   <p>
-    Did you ever want connect directly with other people in your area in a casual manner?
+    Hangoutville is a platform to connect directly with other people in your city.
   </p>
-  <p>
-    Here's how it works:
-  </p>
+  <div class="title">How it works</div>
   <ol>
-    <li>Search for your city</li>
-    <li>Discover who's there</li>
-    <li>Shoot them a message</li>
+    <li>Create a post in your city introducing yourself</li>
+    <li>People reply directly to your inbox</li>
+    <li>Respond to replies or discard them</li>
   </ol>
-  <div class="title">🤔 Who is this for?</div>
+  <div class="title">Why this platform?</div>
   <p>
-    This platform is perfect for:
+    Hangoutville solves the problem of not knowing much about people in our city.  We can get to know people in a casual manner, without consuming lots of our time.
+  </p>
+  <p>
+    Often, we are surrounded by 1,000s (if not 1,000,000s!) of people, yet with no quick introduction to them, we'll never know if we want to meet them or not.
+  </p>
+  <p>
+    Hangoutville solves that by letting people briefly introduce themselves to their city.
+  </p>
+  <div class="title">How can I use Hangoutsville?</div>
+  <p>
+    Here are some examples to get your mind kickin':
   </p>
   <ol>
-    <li>Connecting with people in your area</li>
-    <li>Making yourself known to others</li>
-    <li>Staying connected in a low-key way</li>
+    <li>Find a piano teacher</li>
+    <li>Offer to teach guitar</li>
+    <li>Find collaborators for a project</li>
+    <li>And of course, make friends!</li>
   </ol>
   <div class="title">👏 Have fun!</div>
   <p>

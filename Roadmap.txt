@@ -13,8 +13,9 @@ Bugs
 Next
 ====
 
- [ ] change favicon when new message
- [ ] FEAT Email about unread messages (after ~1hr) "You have 22 new messages on Hangoutville!"
+ [ ] FEAT Add person to group from three-dot menu
+ [ ] FEAT Email about unread messages (1 day old) "You have 22 new messages on Hangoutville"
+  [ ] Email me about new messages after An hour, A day (default), A week, A month, Never
  [ ] FEAT Permissions -> Who can manage this hangout? Just me, Everyone (owner can always change it)
 
 Post Launch

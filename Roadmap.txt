@@ -2,16 +2,24 @@
 Incoming
 ========
 
- [ ]
+ [ ] Location name -> Hangout name
+ [ ] Write a message -> Post
+ [ ] Location description -> about this hangout
 
 Bugs
 ====
 
+ [ ] Send email should be outside the API call for code verification
  [ ] H: send below bottom of screen on FF mobile
  [ ] Clip all text to 1024 chars (posts, chats, name, description, about, location name, )
 
+ [ ] notifications still not making it all the time????
+
 Next
 ====
+
+ [ ] save time zones of users
+  [ ] send emails at 8am in each timezone
 
  [ ] FEAT Add person to group from three-dot menu
  [ ] FEAT Email about unread messages (1 day old) "You have 22 new messages on Hangoutville"
@@ -37,8 +45,11 @@ Post Launch
  [ ] DISC Established people can vote for people to manage their area
  [ ] DISC Calendar features
 
- [ ] H: secret locations that people make available to specific ppl
- [ ] H: think about items that give you access to secret time
+ [ ] Private areas
+   [ ] H: secret locations that people make available to specific ppl
+   [ ] H: think about items that give you access to secret time
+    [ ] Invite specific people, or give them a medallion that they can pass along
+      [ ] I.e. this group has 10 medallions
 
  [ ] Redo WS messaging
 

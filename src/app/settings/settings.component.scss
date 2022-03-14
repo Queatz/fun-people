@@ -5,3 +5,13 @@
 .long {
   word-break: break-word;
 }
+
+.title {
+  .material-icons {
+    cursor: pointer;
+    color: lightgray;
+    font-size: 16px;
+    padding: 0 .25rem;
+    vertical-align: middle;
+  }
+}

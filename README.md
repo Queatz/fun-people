@@ -3,9 +3,8 @@ Setup
 
 ```shell
 apt install certbot nodejs npm
-certbot certonly
 npm install -g angular-http-server
-
+certbot certonly
 ```
 
 ## HTTP -> HTTPS
@@ -31,7 +30,7 @@ server {
 3. Finally, restart Nginx
 
 ```shell
-service restart nginx
+service nginx restart
 ```
 
 Run

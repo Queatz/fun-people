@@ -2,6 +2,8 @@ import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
 import {UiService} from "../ui.service";
 import {of, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {ApiService} from "../api.service";
+import {ColorTranslator} from "colortranslator";
+import {hashCode} from "../util";
 
 @Component({
   selector: 'app-posts',
@@ -86,5 +88,17 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   doItNow() {
     alert('Seriously, do it!')
+  }
+
+  bkg(location: any) {
+    return `linear-gradient(to top, ${this.colors(location.id)})`
+  }
+
+
+  colors(locationId?: string): string {
+    return [
+      ColorTranslator.toRGB({ h: Math.abs(hashCode(locationId || '') % 360), s: `${Math.abs(hashCode(locationId || '') % 9) + 1}0%`, l: '40%' }),
+      ColorTranslator.toRGB({ h: Math.abs(hashCode(locationId || '') % 360), s: `${Math.abs(hashCode(locationId || '') % 9) + 1}0%`, l: '60%' })
+    ].join(', ')
   }
 }

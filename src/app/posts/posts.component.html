@@ -1,3 +1,6 @@
+<div class="banner" *ngIf="ui.location" [style.background-image]="bkg(ui.location)">
+  {{ ui.location.name }}
+</div>
 <div class="header" *ngIf="ui.location">
   <div class="title">People at this hangout</div>
   <div *ngIf="!posts.length" class="secondary">

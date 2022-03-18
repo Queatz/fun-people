@@ -68,3 +68,17 @@ hr {
   border-top: 1px solid silver;
   margin: 2rem 0;
 }
+
+button {
+  border-radius: 1rem;
+  color: white;
+  padding: .5rem 1rem;
+  margin-top: 1rem;
+  background: palevioletred;
+  font-weight: bold;
+  display: inline-flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}

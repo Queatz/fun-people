@@ -51,6 +51,6 @@ Post Launch
     [ ] Invite specific people, or give them a medallion that they can pass along
       [ ] I.e. this group has 10 medallions
 
- [ ] Redo WS messaging
+ [ ] Redo WS messaging (add _type field to json)
 
  [ ] , report spam

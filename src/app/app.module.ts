@@ -12,7 +12,7 @@ import { MessagingComponent } from './messaging/messaging.component';
 import {FormsModule} from "@angular/forms";
 import { LocationLinkComponent } from './location-link/location-link.component';
 import { LocationListComponent } from './location-list/location-list.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import {AuthenticateInterceptor} from "./authenticate.interceptor";
 import { PersonComponent } from './person/person.component';
 import { MenuComponent } from './menu/menu.component';
@@ -33,12 +33,12 @@ import { PostComponent } from './post/post.component';
     MenuComponent,
     PostComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        FormsModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    FormsModule
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthenticateInterceptor, multi: true }
   ],
